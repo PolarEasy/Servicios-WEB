@@ -1,5 +1,5 @@
 // ============================================================
-// INTRO PIXAR - Cubitos que forman "LDV"
+// INTRO LEGO 2D - Cubitos que encajan como piezas
 // ============================================================
 
 (function() {
@@ -9,15 +9,19 @@
     // CONFIGURACIÓN
     // ============================================================
     const CONFIG = {
-        particleCount: 600,          // Cubitos totales
-        letterSpacing: 0.9,          // Separación entre letras
-        animationDuration: 2800,     // ms para ensamblaje
-        cubeSize: 3.5,               // Tamaño de cada cubito
-        colorStart: '#7c6bff',
-        colorEnd: '#a78bfa',
+        particleCount: 750,             // Cubitos totales
+        letterSpacing: 0.85,            // Separación entre letras
+        animationDuration: 3200,        // ms totales
+        cubeSize: 4.2,                  // Tamaño base de cada cubito
+        colors: [
+            '#7c6bff', '#8b7bfa', '#9a8bf8',
+            '#a78bfa', '#b89cfc', '#c9adfe',
+            '#6a59e8', '#5a49d8'
+        ],
         bgColor: '#0a0a0f',
-        gravity: 0.03,
-        damping: 0.98,
+        gravity: 0.008,
+        damping: 0.97,
+        snapDistance: 2.5,              // Distancia para "encajar" con click
     };
 
     // ============================================================
@@ -26,57 +30,59 @@
     const overlay = document.getElementById('introOverlay');
     const canvas = document.getElementById('introCanvas');
     const ctx = canvas.getContext('2d');
-    const progressBar = document.querySelector('.intro-progress-bar');
     const flash = document.querySelector('.intro-flash');
 
     // ============================================================
     // DIMENSIONES
     // ============================================================
     let W, H;
+    let dpr = 1;
 
     function resizeCanvas() {
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
+        dpr = window.devicePixelRatio || 1;
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.width = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.scale(dpr, dpr);
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
     // ============================================================
-    // DIBUJAR TEXTO "LDV" EN UN CANVAS OCULTO PARA OBTENER PÍXELES
+    // OBTENER PÍXELES DEL TEXTO "LDV"
     // ============================================================
     function getTextPixels(text, fontSize) {
         const offscreen = document.createElement('canvas');
         const offCtx = offscreen.getContext('2d');
         
-        // Tamaño del canvas offscreen
-        offscreen.width = W * 0.85;
-        offscreen.height = H * 0.55;
+        offscreen.width = Math.floor(W * 0.9);
+        offscreen.height = Math.floor(H * 0.6);
         
         offCtx.fillStyle = '#000';
         offCtx.fillRect(0, 0, offscreen.width, offscreen.height);
         
-        // Configurar fuente
-        const font = `bold ${fontSize}px 'Inter', 'Arial', sans-serif`;
+        const font = `800 ${fontSize}px 'Inter', 'Arial', sans-serif`;
         offCtx.font = font;
         offCtx.textAlign = 'center';
         offCtx.textBaseline = 'middle';
         offCtx.fillStyle = '#fff';
+        offCtx.shadowColor = 'rgba(255,255,255,0.1)';
+        offCtx.shadowBlur = 4;
         offCtx.fillText(text, offscreen.width / 2, offscreen.height / 2);
         
-        // Obtener datos de píxeles
         const imageData = offCtx.getImageData(0, 0, offscreen.width, offscreen.height);
         const data = imageData.data;
         
-        // Extraer posiciones donde hay píxeles blancos
         const positions = [];
-        const step = 2; // Muestreo para reducir cantidad de puntos
+        const step = 2;
         
         for (let y = 0; y < offscreen.height; y += step) {
             for (let x = 0; x < offscreen.width; x += step) {
                 const index = (y * offscreen.width + x) * 4;
-                // Si el píxel es blanco (valor > 128)
                 if (data[index] > 128) {
-                    // Mapear a coordenadas del canvas principal
                     const px = (x / offscreen.width) * W;
                     const py = (y / offscreen.height) * H;
                     positions.push({ x: px, y: py });
@@ -88,165 +94,308 @@
     }
 
     // ============================================================
-    // PARTÍCULAS
+    // SISTEMA DE PARTÍCULAS (Cubitos LEGO)
     // ============================================================
     let particles = [];
-    let targetPositions = [];
     let progress = 0;
     let isComplete = false;
     let animationFrame = null;
+    let clickEffects = [];
+    let sparkles = [];
 
-    class Particle {
-        constructor(targetX, targetY) {
+    // ============================================================
+    // CLASE CUBITO LEGO
+    // ============================================================
+    class LegoParticle {
+        constructor(targetX, targetY, index, total) {
             this.targetX = targetX;
             this.targetY = targetY;
+            this.index = index;
+            this.total = total;
             
-            // Posición inicial: desde los bordes
+            // Posición inicial: desde los bordes con distribución aleatoria
             const side = Math.random() < 0.5 ? 'left' : 'right';
+            const offsetY = (Math.random() - 0.5) * H * 0.4;
+            
             if (side === 'left') {
-                this.x = -Math.random() * W * 0.4;
-                this.y = Math.random() * H;
+                this.x = -W * (0.2 + Math.random() * 0.3);
+                this.y = H * 0.5 + offsetY;
             } else {
-                this.x = W + Math.random() * W * 0.4;
-                this.y = Math.random() * H;
+                this.x = W * (1 + 0.2 + Math.random() * 0.3);
+                this.y = H * 0.5 + offsetY;
             }
             
-            // Velocidad aleatoria
-            const angle = Math.random() * Math.PI * 2;
-            const speed = Math.random() * 2 + 0.5;
-            this.vx = Math.cos(angle) * speed * 1.2;
-            this.vy = Math.sin(angle) * speed * 1.2;
+            // Velocidad inicial - más rápida desde los bordes
+            const speed = 2 + Math.random() * 3.5;
+            const angle = (Math.random() - 0.5) * 1.2;
+            const dir = side === 'left' ? 1 : -1;
+            this.vx = dir * speed * (0.8 + Math.random() * 0.4);
+            this.vy = (Math.random() - 0.5) * speed * 0.6;
             
-            // Tamaño y color
-            this.size = CONFIG.cubeSize * (0.6 + Math.random() * 0.8);
-            const hue = 250 + Math.random() * 30;
-            this.color = `hsl(${hue}, 70%, ${65 + Math.random() * 25}%)`;
+            // Tamaño - variación LEGO
+            this.size = CONFIG.cubeSize * (0.7 + Math.random() * 0.7);
             
-            // Fase de animación
+            // Color - paleta LEGO
+            this.color = CONFIG.colors[Math.floor(Math.random() * CONFIG.colors.length)];
+            
+            // Fase única para efectos
             this.phase = Math.random() * Math.PI * 2;
-            this.delay = Math.random() * 200;
-            this.dist = 0;
+            this.delay = (Math.random() * 300) + (index / total) * 200;
             
-            // Estado
-            this.active = true;
+            // Estado de "encaje"
+            this.snapped = false;
+            this.snapTime = 0;
+            this.snapOffsetX = 0;
+            this.snapOffsetY = 0;
+            
+            // Rotación (estilo LEGO)
+            this.rotation = (Math.random() - 0.5) * 0.5;
+            this.rotationSpeed = (Math.random() - 0.5) * 0.03;
+            
+            // Brillo
+            this.glowIntensity = 0.2 + Math.random() * 0.3;
         }
 
         update(time, progress) {
             const p = Math.min(progress, 1);
             
-            // Interpolación suave con easing
+            // Easing suave (cubic bezier aproximado)
             const ease = p < 0.5 
-                ? 2 * p * p 
-                : 1 - Math.pow(-2 * p + 2, 2) / 2;
+                ? 4 * p * p * p 
+                : 1 - Math.pow(-2 * p + 2, 3) / 2;
             
-            // Movimiento hacia el target con efecto flotante
-            const targetX = this.targetX;
-            const targetY = this.targetY;
-            
-            // Si la partícula ya llegó, se queda quieta con pequeña vibración
-            if (p >= 1) {
-                const vib = 0.4;
-                this.x = targetX + Math.sin(time * 0.002 + this.phase) * vib;
-                this.y = targetY + Math.cos(time * 0.0025 + this.phase * 0.7) * vib;
-                this.dist = 0;
+            // Si ya está encajada, vibración mínima
+            if (this.snapped) {
+                const vib = 0.15;
+                const t = time * 0.002;
+                this.x = this.targetX + Math.sin(t * 1.3 + this.phase) * vib;
+                this.y = this.targetY + Math.cos(t * 1.7 + this.phase * 0.7) * vib;
+                this.rotation += Math.sin(t * 0.5 + this.phase) * 0.0002;
+                
+                // Efecto "click" - partículas de polvo
+                if (this.snapTime === 0) {
+                    this.snapTime = time;
+                    // Generar chispas
+                    for (let i = 0; i < 3; i++) {
+                        sparkles.push({
+                            x: this.targetX + (Math.random() - 0.5) * 8,
+                            y: this.targetY + (Math.random() - 0.5) * 8,
+                            vx: (Math.random() - 0.5) * 2,
+                            vy: -Math.random() * 2 - 0.5,
+                            life: 1,
+                            size: 1 + Math.random() * 2,
+                            color: this.color
+                        });
+                    }
+                }
                 return;
             }
             
-            // Efecto de atracción con física suave
-            const dx = targetX - this.x;
-            const dy = targetY - this.y;
-            this.dist = Math.sqrt(dx * dx + dy * dy);
+            // --- Movimiento hacia el target ---
+            const dx = this.targetX - this.x;
+            const dy = this.targetY - this.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
             
-            // Fuerza de atracción (más fuerte cuando está lejos)
-            const force = 0.03 + (1 - ease) * 0.015;
-            this.vx += dx * force * 0.06;
-            this.vy += dy * force * 0.06;
+            // Si está muy cerca, encaja con "click"
+            if (dist < CONFIG.snapDistance && p > 0.3) {
+                this.snapped = true;
+                this.snapTime = 0;
+                this.x = this.targetX;
+                this.y = this.targetY;
+                return;
+            }
+            
+            // Fuerza de atracción - aumenta con el tiempo
+            const attraction = 0.04 + ease * 0.06;
+            const forceX = dx * attraction * 0.05;
+            const forceY = dy * attraction * 0.05;
+            
+            this.vx += forceX;
+            this.vy += forceY;
             
             // Amortiguación
             this.vx *= CONFIG.damping;
             this.vy *= CONFIG.damping;
             
+            // Gravedad suave
+            this.vy += CONFIG.gravity * (1 - ease * 0.5);
+            
             // Movimiento
             this.x += this.vx;
             this.y += this.vy;
             
-            // Efecto de "flotación" aleatoria durante el viaje
-            const wave = Math.sin(time * 0.003 + this.phase) * 0.2 * (1 - ease);
-            this.x += wave * 0.3;
-            this.y += Math.cos(time * 0.004 + this.phase * 1.3) * 0.2 * (1 - ease);
+            // Rotación - se alinea con el movimiento
+            this.rotation += this.vx * 0.002 + this.vy * 0.001;
+            this.rotation *= 0.99;
+            
+            // Efecto de flotación durante el viaje
+            const waveAmp = 0.3 * (1 - ease);
+            this.x += Math.sin(time * 0.002 + this.phase) * waveAmp;
+            this.y += Math.cos(time * 0.0025 + this.phase * 0.7) * waveAmp * 0.6;
         }
 
         draw(ctx, time) {
-            // Efecto de brillo
-            const glow = ctx.createRadialGradient(
-                this.x, this.y, 0,
-                this.x, this.y, this.size * 2
-            );
-            glow.addColorStop(0, this.color);
-            glow.addColorStop(1, 'transparent');
-            
-            ctx.shadowColor = this.color;
-            ctx.shadowBlur = this.size * 2;
-            
-            // Dibujar cubito (cuadrado con esquinas redondeadas)
             const s = this.size;
-            const r = 2;
+            const r = s * 0.3; // Radio de esquina
+            
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.rotation);
+            
+            // === Sombra (efecto 2D LEGO) ===
+            ctx.shadowColor = 'rgba(0,0,0,0.3)';
+            ctx.shadowBlur = s * 0.5;
+            ctx.shadowOffsetX = s * 0.15;
+            ctx.shadowOffsetY = s * 0.2;
+            
+            // === Cuerpo del cubito ===
             ctx.beginPath();
-            ctx.moveTo(this.x - s + r, this.y - s);
-            ctx.lineTo(this.x + s - r, this.y - s);
-            ctx.quadraticCurveTo(this.x + s, this.y - s, this.x + s, this.y - s + r);
-            ctx.lineTo(this.x + s, this.y + s - r);
-            ctx.quadraticCurveTo(this.x + s, this.y + s, this.x + s - r, this.y + s);
-            ctx.lineTo(this.x - s + r, this.y + s);
-            ctx.quadraticCurveTo(this.x - s, this.y + s, this.x - s, this.y + s - r);
-            ctx.lineTo(this.x - s, this.y - s + r);
-            ctx.quadraticCurveTo(this.x - s, this.y - s, this.x - s + r, this.y - s);
+            ctx.moveTo(-s + r, -s);
+            ctx.lineTo(s - r, -s);
+            ctx.quadraticCurveTo(s, -s, s, -s + r);
+            ctx.lineTo(s, s - r);
+            ctx.quadraticCurveTo(s, s, s - r, s);
+            ctx.lineTo(-s + r, s);
+            ctx.quadraticCurveTo(-s, s, -s, s - r);
+            ctx.lineTo(-s, -s + r);
+            ctx.quadraticCurveTo(-s, -s, -s + r, -s);
             ctx.closePath();
             
-            // Relleno
+            // Relleno base
             ctx.fillStyle = this.color;
             ctx.fill();
             
-            // Resplandor interior (efecto 3D)
-            const grad = ctx.createLinearGradient(
-                this.x - s, this.y - s,
-                this.x + s, this.y + s
-            );
-            grad.addColorStop(0, 'rgba(255,255,255,0.15)');
-            grad.addColorStop(0.5, 'rgba(255,255,255,0)');
+            // === Borde (efecto LEGO) ===
+            ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+            
+            // === Brillo (efecto 2D) ===
+            const grad = ctx.createLinearGradient(-s, -s, s, s);
+            grad.addColorStop(0, 'rgba(255,255,255,0.2)');
+            grad.addColorStop(0.3, 'rgba(255,255,255,0.05)');
+            grad.addColorStop(0.7, 'rgba(0,0,0,0.05)');
             grad.addColorStop(1, 'rgba(0,0,0,0.15)');
             ctx.fillStyle = grad;
             ctx.fill();
             
+            // === Punto de conexión LEGO (top) ===
+            if (s > 2) {
+                ctx.beginPath();
+                ctx.arc(0, -s * 0.6, s * 0.15, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,0.05)';
+                ctx.fill();
+            }
+            
+            ctx.shadowColor = 'transparent';
             ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            
+            ctx.restore();
         }
     }
 
     // ============================================================
-    // INICIAR
+    // GENERAR CHISPAS (efecto click)
+    // ============================================================
+    function drawSparkles(ctx, time) {
+        for (let i = sparkles.length - 1; i >= 0; i--) {
+            const s = sparkles[i];
+            s.x += s.vx;
+            s.y += s.vy;
+            s.vy += 0.04;
+            s.life -= 0.015;
+            
+            if (s.life <= 0) {
+                sparkles.splice(i, 1);
+                continue;
+            }
+            
+            ctx.globalAlpha = s.life * 0.8;
+            ctx.fillStyle = s.color;
+            ctx.shadowColor = s.color;
+            ctx.shadowBlur = 6;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.size * s.life, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            ctx.globalAlpha = 1;
+        }
+    }
+
+    // ============================================================
+    // EFECTO DE "POLVO" EN EL FONDO
+    // ============================================================
+    function drawDust(ctx, time) {
+        for (let i = 0; i < 20; i++) {
+            const x = (Math.sin(time * 0.0003 + i * 2.7) * 0.5 + 0.5) * W;
+            const y = (Math.cos(time * 0.0004 + i * 3.1) * 0.5 + 0.5) * H;
+            const size = 1 + Math.sin(time * 0.001 + i) * 0.5;
+            ctx.fillStyle = `rgba(124,107,255,${0.02 + Math.sin(time * 0.0005 + i) * 0.01})`;
+            ctx.beginPath();
+            ctx.arc(x, y, size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    // ============================================================
+    // BARRA DE PROGRESO LEGO
+    // ============================================================
+    function updateProgressBar(p) {
+        const container = document.querySelector('.intro-progress');
+        if (!container) return;
+        
+        const blocks = container.querySelectorAll('.intro-progress-block');
+        const total = blocks.length;
+        const active = Math.floor(p * total);
+        
+        blocks.forEach((block, i) => {
+            block.classList.remove('active', 'done');
+            if (i < active) {
+                block.classList.add('done');
+            }
+            if (i === active && p < 1) {
+                block.classList.add('active');
+            }
+        });
+    }
+
+    // ============================================================
+    // INICIALIZAR
     // ============================================================
     function initIntro() {
-        // Calcular tamaño de fuente dinámico
-        const fontSize = Math.min(W * 0.22, H * 0.45, 200);
+        const fontSize = Math.min(W * 0.22, H * 0.42, 180);
         
-        // Obtener posiciones de las letras "LDV"
-        const text = 'LDV';
-        targetPositions = getTextPixels(text, fontSize);
+        // Obtener posiciones del texto "LDV"
+        const targetPositions = getTextPixels('LDV', fontSize);
         
-        // Reducir o aumentar partículas según sea necesario
+        // Seleccionar posiciones
         const targetCount = Math.min(targetPositions.length, CONFIG.particleCount);
+        const selectedPositions = [];
         const step = Math.floor(targetPositions.length / targetCount);
         
-        // Seleccionar posiciones aleatorias
-        const selectedPositions = [];
-        for (let i = 0; i < targetPositions.length; i += step) {
-            if (Math.random() < 0.3 || selectedPositions.length < targetCount) {
+        for (let i = 0; i < targetPositions.length && selectedPositions.length < targetCount; i += step) {
+            if (Math.random() < 0.3 || selectedPositions.length < targetCount * 0.7) {
                 selectedPositions.push(targetPositions[i]);
             }
         }
         
         // Crear partículas
-        particles = selectedPositions.map(pos => new Particle(pos.x, pos.y));
+        particles = selectedPositions.map((pos, i) => 
+            new LegoParticle(pos.x, pos.y, i, selectedPositions.length)
+        );
+        
+        // Crear barra de progreso LEGO
+        const progressContainer = document.querySelector('.intro-progress');
+        if (progressContainer) {
+            progressContainer.innerHTML = '';
+            for (let i = 0; i < 30; i++) {
+                const block = document.createElement('div');
+                block.className = 'intro-progress-block';
+                progressContainer.appendChild(block);
+            }
+        }
         
         // Iniciar animación
         const startTime = performance.now();
@@ -257,13 +406,14 @@
             progress = Math.min(elapsed / CONFIG.animationDuration, 1);
             
             // Actualizar barra de progreso
-            if (progressBar) {
-                progressBar.style.width = (progress * 100) + '%';
-            }
+            updateProgressBar(progress);
             
-            // Limpiar canvas con fondo
+            // Limpiar canvas
             ctx.fillStyle = CONFIG.bgColor;
             ctx.fillRect(0, 0, W, H);
+            
+            // Fondo con efecto de "profundidad"
+            drawDust(ctx, time);
             
             // Actualizar y dibujar partículas
             particles.forEach(p => {
@@ -271,59 +421,37 @@
                 p.draw(ctx, time);
             });
             
-            // Efecto de "estelas" o rastros
-            if (progress < 0.8) {
-                ctx.fillStyle = 'rgba(10,10,15,0.08)';
+            // Dibujar chispas (efecto click)
+            drawSparkles(ctx, time);
+            
+            // Efecto de "sombra de texto" cuando está casi completo
+            if (progress > 0.85 && progress < 1) {
+                ctx.fillStyle = `rgba(124,107,255,${(progress - 0.85) * 0.03})`;
                 ctx.fillRect(0, 0, W, H);
             }
             
-            // Partículas de polvo/brillo que aparecen al final
-            if (progress > 0.7 && progress < 1) {
-                const sparkleCount = Math.floor((progress - 0.7) * 30);
-                for (let i = 0; i < sparkleCount; i++) {
-                    const idx = Math.floor(Math.random() * particles.length);
-                    const p = particles[idx];
-                    if (p) {
-                        const s = 1 + Math.random() * 2;
-                        ctx.fillStyle = `rgba(255,255,255,${0.3 + Math.random() * 0.7})`;
-                        ctx.shadowColor = '#fff';
-                        ctx.shadowBlur = 10;
-                        ctx.beginPath();
-                        ctx.arc(
-                            p.x + (Math.random() - 0.5) * 10,
-                            p.y + (Math.random() - 0.5) * 10,
-                            s, 0, Math.PI * 2
-                        );
-                        ctx.fill();
-                        ctx.shadowBlur = 0;
-                    }
-                }
-            }
-            
-            // Cuando se complete la animación
+            // === DESTELLO FINAL ===
             if (progress >= 1 && !isComplete) {
                 isComplete = true;
                 
-                // Crear destello
+                // Destello
                 if (flash) {
                     flash.classList.add('active');
                     setTimeout(() => {
                         flash.classList.remove('active');
-                    }, 800);
+                    }, 900);
                 }
                 
-                // Ocultar overlay después del destello
+                // Ocultar overlay
                 setTimeout(() => {
                     if (overlay) {
                         overlay.classList.add('hidden');
                     }
-                    // Liberar recursos
                     if (animationFrame) {
                         cancelAnimationFrame(animationFrame);
                     }
                 }, 500);
                 
-                // Disparar evento para que la página sepa que terminó
                 document.dispatchEvent(new CustomEvent('introComplete'));
             }
             
@@ -334,23 +462,24 @@
     }
 
     // ============================================================
-    // ESPERAR A QUE LA PÁGINA ESTÉ LISTA
+    // INICIO
     // ============================================================
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
-        initIntro();
+        setTimeout(initIntro, 100);
     } else {
-        document.addEventListener('DOMContentLoaded', initIntro);
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(initIntro, 100);
+        });
     }
 
     // ============================================================
-    // RESPONSIVE: reiniciar si cambia el tamaño (simple)
+    // RESPONSIVE
     // ============================================================
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
             if (!isComplete) {
-                // Solo redimensionar canvas, no reiniciar la animación
                 resizeCanvas();
             }
         }, 300);
