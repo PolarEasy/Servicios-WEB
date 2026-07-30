@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,6 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet"/>
 </head>
 <body>
+
+    <!-- ============ PARTICULAS DE FONDO ============ -->
+    <div id="particles-container"></div>
+
+    <!-- ============ SELECTOR DE TEMAS ============ -->
+    <div class="theme-selector">
+        <button class="theme-btn" data-theme="dark" title="Modo Oscuro">🌙</button>
+        <button class="theme-btn" data-theme="light" title="Modo Claro">☀️</button>
+        <button class="theme-btn" data-theme="amber" title="Modo Ámbar">🟠</button>
+        <button class="theme-btn" data-theme="aurora" title="Modo Aurora">🌌</button>
+    </div>
 
     <!-- ============ NAVEGACIÓN ============ -->
     <nav>
@@ -20,21 +31,19 @@
                 <li><a href="#testimonios">Testimonios</a></li>
                 <li><a href="#contacto" class="nav-cta">Hablar ahora</a></li>
             </ul>
-            <!-- Menú hamburguesa (móvil) -->
             <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
         </div>
     </nav>
 
-    <!-- ============ HERO - IMPACTO TOTAL ============ -->
+    <!-- ============ HERO ============ -->
     <header class="hero">
         <div class="container">
             <div class="hero-grid">
-                <!-- Columna izquierda: Texto -->
                 <div class="hero-text">
                     <div class="hero-badge">🚀 Desarrollo de software</div>
                     <h1>
                         Convierte tus ideas en<br />
-                        <span class="highlight">herramientas que funcionan</span>
+                        <span class="highlight" id="dynamic-text">herramientas que funcionan</span>
                     </h1>
                     <p class="hero-sub">
                         No más procesos manuales, pérdidas de tiempo o software que no se adapta. 
@@ -44,14 +53,13 @@
                         <a href="#que-hago" class="btn-primary">Ver cómo lo hago →</a>
                         <a href="#contacto" class="btn-secondary">Hablar directo</a>
                     </div>
-                    <!-- Mini stats -->
                     <div class="hero-stats">
                         <div class="stat">
-                            <span class="stat-number">30+</span>
+                            <span class="stat-number" data-count="30">0</span><span class="stat-number">+</span>
                             <span class="stat-label">Proyectos entregados</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-number">100%</span>
+                            <span class="stat-number" data-count="100">0</span><span class="stat-number">%</span>
                             <span class="stat-label">Clientes satisfechos</span>
                         </div>
                         <div class="stat">
@@ -61,20 +69,24 @@
                     </div>
                 </div>
 
-                <!-- Columna derecha: Foto + efecto -->
                 <div class="hero-visual">
                     <div class="avatar-frame">
+                        <div class="aura-glow"></div>
                         <img src="https://ui-avatars.com/api/?name=Luis+Diosvan&size=200&background=6c63ff&color=fff&bold=true&font-size=0.5" alt="Luis Diosvan" class="avatar-large" />
                         <div class="floating-badge badge-1">⚡ Automatización</div>
                         <div class="floating-badge badge-2">🌐 Web</div>
                         <div class="floating-badge badge-3">📦 Apps</div>
+                        <!-- Ondas de energía -->
+                        <div class="wave-ring ring-1"></div>
+                        <div class="wave-ring ring-2"></div>
+                        <div class="wave-ring ring-3"></div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- ============ QUÉ HAGO (Servicios renovados) ============ -->
+    <!-- ============ SERVICIOS ============ -->
     <section id="que-hago" class="services">
         <div class="container">
             <div class="section-header">
@@ -87,71 +99,61 @@
             </div>
 
             <div class="services-grid">
-                <!-- Servicio 1 -->
                 <div class="service-card">
                     <div class="service-icon">⚡</div>
                     <h3>Automatización inteligente</h3>
-                    <p>Esa tarea repetitiva que odias hacer cada día... yo la convierto en un script que corre solo. Tú te olvidas, yo me encargo.</p>
+                    <p>Esa tarea repetitiva que odias hacer cada día... yo la convierto en un script que corre solo.</p>
                     <a href="herramientas.html" class="service-link">Ver herramientas →</a>
                 </div>
-
-                <!-- Servicio 2 -->
                 <div class="service-card highlight-card">
                     <div class="service-icon">🌐</div>
                     <h3>Páginas web que venden</h3>
-                    <p>Tu negocio necesita presencia digital. Te hago una web rápida, bonita y optimizada para que te encuentren en Google.</p>
+                    <p>Tu negocio necesita presencia digital. Te hago una web rápida, bonita y optimizada.</p>
                     <a href="herramientas.html" class="service-link">Ver herramientas →</a>
                 </div>
-
-                <!-- Servicio 3 -->
                 <div class="service-card">
                     <div class="service-icon">📦</div>
                     <h3>Herramientas a medida</h3>
-                    <p>¿Ningún software hace lo que necesitas? Te creo la solución exacta. Desde un .exe hasta un sistema completo.</p>
+                    <p>¿Ningún software hace lo que necesitas? Te creo la solución exacta desde cero.</p>
                     <a href="herramientas.html" class="service-link">Ver herramientas →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============ HERRAMIENTAS DESTACADAS ============ -->
+    <!-- ============ HERRAMIENTAS ============ -->
     <section id="herramientas" class="tools-section">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Descargas gratuitas</span>
                 <h2>Herramientas que <span class="highlight">ya puedes usar</span></h2>
-                <p class="section-sub">
-                    Todas mis herramientas son 100% gratuitas. Solo descarga, ejecuta y empieza a ahorrar tiempo.
-                </p>
+                <p class="section-sub">Todas mis herramientas son 100% gratuitas. Descarga, ejecuta y ahorra tiempo.</p>
             </div>
-
             <div class="tools-grid">
                 <div class="tool-card">
                     <div class="tool-icon">📂</div>
                     <h4>Organizador de Archivos</h4>
-                    <p>Ordena tus descargas en segundos. Mueve imágenes, documentos y videos a sus carpetas.</p>
+                    <p>Ordena tus descargas en segundos.</p>
                     <div class="tool-tags">
                         <span>📄 .bat</span>
                         <span>📦 2.4 MB</span>
                     </div>
                     <a href="detalle-organizador.html" class="tool-btn">Ver más →</a>
                 </div>
-
                 <div class="tool-card">
                     <div class="tool-icon">📊</div>
                     <h4>Generador de Reportes</h4>
-                    <p>Convierte Excel a PDF con un clic. Ideal para informes de ventas o inventarios.</p>
+                    <p>Convierte Excel a PDF con un clic.</p>
                     <div class="tool-tags">
                         <span>📄 .exe</span>
                         <span>📦 5.1 MB</span>
                     </div>
                     <a href="detalle-reportes.html" class="tool-btn">Ver más →</a>
                 </div>
-
                 <div class="tool-card">
                     <div class="tool-icon">🧹</div>
                     <h4>Limpiador de Temporales</h4>
-                    <p>Libera espacio en tu PC eliminando archivos basura y caché del sistema.</p>
+                    <p>Libera espacio en tu PC.</p>
                     <div class="tool-tags">
                         <span>📄 .exe</span>
                         <span>📦 3.8 MB</span>
@@ -159,21 +161,19 @@
                     <a href="detalle-limpiador.html" class="tool-btn">Ver más →</a>
                 </div>
             </div>
-
             <div class="tools-cta">
                 <a href="herramientas.html" class="btn-primary">Ver todas las herramientas →</a>
             </div>
         </div>
     </section>
 
-    <!-- ============ TESTIMONIOS (Social Proof) ============ -->
+    <!-- ============ TESTIMONIOS ============ -->
     <section id="testimonios" class="testimonials">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Lo que dicen</span>
                 <h2>Confianza que <span class="highlight">construye proyectos</span></h2>
             </div>
-
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
@@ -183,19 +183,17 @@
                         <span>Dueño de tienda online</span>
                     </div>
                 </div>
-
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
-                    <p>"Mi página web pasó de ser un adorno a una máquina de ventas. Luis entendió mi negocio desde el día 1."</p>
+                    <p>"Mi página web pasó de ser un adorno a una máquina de ventas."</p>
                     <div class="testimonial-author">
                         <strong>Valentina R.</strong>
                         <span>Emprendedora digital</span>
                     </div>
                 </div>
-
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
-                    <p>"El generador de reportes me salvó la vida. PDFs perfectos en segundos. No sé cómo vivía sin esto."</p>
+                    <p>"El generador de reportes me salvó la vida. PDFs perfectos en segundos."</p>
                     <div class="testimonial-author">
                         <strong>Andrés P.</strong>
                         <span>Gerente de operaciones</span>
@@ -214,20 +212,14 @@
                     <h2>¿Tienes una idea o un problema?</h2>
                     <p>Cuéntame lo que necesitas. Sin compromiso, solo una charla para explorar cómo puedo ayudarte.</p>
                     <div class="contact-links">
-                        <a href="mailto:Luiseverth@gmail.com" class="contact-link">
-                            <span>📧</span> Luiseverth@gmail.com
-                        </a>
-                        <a href="https://wa.me/573123456789" target="_blank" class="contact-link">
-                            <span>💬</span> WhatsApp
-                        </a>
-                        <a href="https://github.com/PolarEasy" target="_blank" class="contact-link">
-                            <span>🐙</span> GitHub
-                        </a>
+                        <a href="mailto:Luiseverth@gmail.com" class="contact-link">📧 Luiseverth@gmail.com</a>
+                        <a href="https://wa.me/573123456789" target="_blank" class="contact-link">💬 WhatsApp</a>
+                        <a href="https://github.com/PolarEasy" target="_blank" class="contact-link">🐙 GitHub</a>
                     </div>
                 </div>
                 <div class="contact-cta">
                     <a href="mailto:Luiseverth@gmail.com" class="btn-primary btn-large">✉️ Envíame un correo</a>
-                    <p class="contact-note">📍 Disponible para proyectos remotos · Respuesta en < 24 h</p>
+                    <p class="contact-note">📍 Disponible · Respuesta en < 24 h</p>
                 </div>
             </div>
         </div>
@@ -253,6 +245,9 @@
         </div>
     </footer>
 
+    <script src="script.js"></script>
+</body>
+</html>
     <script src="script.js"></script>
 </body>
 </html>
