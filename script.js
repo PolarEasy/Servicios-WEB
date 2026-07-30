@@ -1,30 +1,6 @@
 // ============================================================
 // SCRIPT COMPLETO - Luis Diosvan
-// ============================================================
-
-// ============================================================
-// 1. ESPERAR A QUE LA INTRO TERMINE
-// ============================================================
-(function() {
-    const overlay = document.getElementById('introOverlay');
-    if (overlay) {
-        document.body.style.animation = 'none';
-        document.body.style.opacity = '0';
-        
-        document.addEventListener('introComplete', function() {
-            document.body.style.animation = 'fadeIn 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards';
-            document.body.style.opacity = '0';
-        });
-        
-        setTimeout(() => {
-            if (overlay && !overlay.classList.contains('hidden')) {
-                overlay.classList.add('hidden');
-                document.body.style.animation = 'fadeIn 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards';
-                document.body.style.opacity = '0';
-            }
-        }, 6000);
-    }
-})();
+// ===========================================================
 
 // ============================================================
 // 2. MENÚ HAMBURGUESA
