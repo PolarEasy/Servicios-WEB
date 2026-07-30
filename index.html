@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mis Servicios como Programador</title>
-    <!-- Enlazamos el CSS -->
+    <title>Luis Diosvan - Desarrollo de Software</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- Fuente bonita de Google -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet"/>
 </head>
 <body>
-    <!-- Barra de navegación -->
+
+    <!-- NAVEGACIÓN -->
     <nav>
         <div class="container">
-            <div class="logo">🧑‍💻 MiDev</div>
+            <div class="logo">🧑‍💻 Luis Diosvan</div>
             <ul class="nav-links">
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#herramientas">Herramientas</a></li>
@@ -22,81 +21,92 @@
         </div>
     </nav>
 
-    <!-- Sección principal (Hero) -->
-    <header>
+    <!-- HEADER CON FOTO CIRCULAR FLOTANTE -->
+    <header class="hero">
         <div class="container">
-            <h1>Transformo tus ideas en <span class="highlight">software funcional</span></h1>
-            <p>Desarrollador de software con experiencia en automatización, herramientas a medida y soluciones web. Ayudo a pequeños negocios a optimizar sus procesos.</p>
-            <a href="#contacto" class="btn">Contrátame</a>
+            <div class="hero-content">
+                <div class="avatar-container">
+                    <img src="https://ui-avatars.com/api/?name=Luis+Diosvan&size=150&background=6c63ff&color=fff&bold=true" alt="Luis Diosvan" class="avatar" />
+                </div>
+                <h1>Software a medida para <span class="highlight">tu negocio</span></h1>
+                <p>Soy Luis Diosvan, desarrollador de software. Creo herramientas que resuelven problemas reales: desde automatizaciones hasta sistemas web para pequeños negocios. Rápido, confiable y sin complicaciones.</p>
+                <a href="#contacto" class="btn">Contáctame</a>
+            </div>
         </div>
     </header>
 
-    <!-- Sección de Servicios -->
+    <!-- SERVICIOS CON BOTONES A EJECUTABLES -->
     <section id="servicios">
         <div class="container">
-            <h2>Mis Servicios</h2>
+            <h2>Lo que hago</h2>
             <div class="cards">
                 <div class="card">
-                    <h3>🔧 Automatización</h3>
-                    <p>Creo scripts y programas que automatizan tareas repetitivas, ahorrando tiempo y reduciendo errores.</p>
+                    <h3>🤖 Automatización</h3>
+                    <p>Creo scripts que hacen tareas repetitivas por ti. Ahorra horas de trabajo con un simple clic.</p>
+                    <a href="herramientas.html" class="btn-card">Ver herramientas</a>
                 </div>
                 <div class="card">
-                    <h3>🌐 Desarrollo Web</h3>
-                    <p>Páginas web rápidas y funcionales para que tu negocio tenga presencia en línea.</p>
+                    <h3>🌐 Páginas web</h3>
+                    <p>Tu negocio necesita presencia en línea. Te hago una web rápida, bonita y que funciona en celulares.</p>
+                    <a href="herramientas.html" class="btn-card">Ver herramientas</a>
                 </div>
                 <div class="card">
-                    <h3>📦 Herramientas a medida</h3>
-                    <p>Software personalizado para resolver problemas específicos de tu negocio.</p>
+                    <h3>⚙️ Herramientas a medida</h3>
+                    <p>¿Tienes un problema que ningún software resuelve? Te desarrollo la solución exacta que necesitas.</p>
+                    <a href="herramientas.html" class="btn-card">Ver herramientas</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección de Herramientas (donde irán tus ejecutables) -->
+    <!-- HERRAMIENTAS (SECCIÓN CON BOTONES) -->
     <section id="herramientas">
         <div class="container">
-            <h2>🛠️ Herramientas descargables</h2>
-            <p>Aquí encontrarás utilidades que he desarrollado y que puedes usar gratis.</p>
+            <h2>🛠️ Mis herramientas</h2>
+            <p>Descarga mis utilidades gratuitas. Cada herramienta está diseñada para resolver un problema específico.</p>
             <div class="tools-grid">
-                <!-- Los enlaces los actualizaremos cuando subamos los ejecutables -->
                 <div class="tool-card">
                     <h4>📂 Organizador de Archivos</h4>
                     <p>Script que ordena automáticamente tus descargas por tipo.</p>
-                    <a href="#" class="btn-download">Próximamente</a>
+                    <a href="herramientas.html" class="btn-download">Ver más</a>
                 </div>
                 <div class="tool-card">
                     <h4>📊 Generador de Reportes</h4>
                     <p>Convierte datos de Excel en reportes PDF con un clic.</p>
-                    <a href="#" class="btn-download">Próximamente</a>
+                    <a href="herramientas.html" class="btn-download">Ver más</a>
                 </div>
                 <div class="tool-card">
                     <h4>🧹 Limpiador de Archivos Temporales</h4>
                     <p>Libera espacio en tu PC eliminando archivos innecesarios.</p>
-                    <a href="#" class="btn-download">Próximamente</a>
+                    <a href="herramientas.html" class="btn-download">Ver más</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección de Contacto -->
+    <!-- CONTACTO -->
     <section id="contacto">
         <div class="container">
-            <h2>📬 Contacto</h2>
-            <p>¿Tienes un proyecto en mente? Escríbeme y lo hacemos realidad.</p>
+            <h2>📬 ¿Hablamos?</h2>
+            <p>Cuéntame tu idea o problema. Sin compromiso, solo una charla para ver cómo puedo ayudarte.</p>
             <div class="contact-info">
-                <a href="mailto:tucorreo@ejemplo.com">📧 tucorreo@ejemplo.com</a>
-                <a href="https://wa.me/573000000000" target="_blank">💬 WhatsApp</a>
-                <a href="https://github.com/tu-usuario" target="_blank">🐙 GitHub</a>
+                <a href="mailto:Luiseverth@gmail.com">📧 Luiseverth@gmail.com</a>
+                <a href="https://wa.me/573123456789" target="_blank">💬 WhatsApp</a>
+                <a href="https://github.com/PolarEasy" target="_blank">🐙 GitHub</a>
             </div>
         </div>
     </section>
 
-    <!-- Pie de página -->
+    <!-- FOOTER -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 MiDev - Hecho con ❤️ y código</p>
+            <p>&copy; 2026 Luis Diosvan - Hecho con ❤️ y código</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
 
     <!-- Enlazamos el JavaScript -->
     <script src="script.js"></script>
