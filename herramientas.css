@@ -1,0 +1,144 @@
+/* FOLDER HEADER */
+.folder-header {
+    padding: 40px 0 20px;
+    text-align: center;
+}
+
+.folder-breadcrumb {
+    font-size: 0.9rem;
+    color: #808090;
+    margin-bottom: 15px;
+}
+
+.folder-breadcrumb a {
+    color: #6c63ff;
+    text-decoration: none;
+}
+
+.folder-breadcrumb .current {
+    color: #e0e0e0;
+}
+
+.folder-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.folder-header p {
+    color: #a0a0b0;
+    font-size: 1.1rem;
+}
+
+/* FILE LIST */
+.file-list {
+    padding: 20px 0 60px;
+}
+
+.file-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    background: rgba(20, 20, 31, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 18px 22px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.3s, border-color 0.3s, transform 0.2s;
+    gap: 18px;
+}
+
+.file-item:hover {
+    background: rgba(30, 30, 45, 0.9);
+    border-color: #6c63ff;
+    transform: translateX(6px);
+}
+
+.file-icon {
+    font-size: 2.2rem;
+    flex-shrink: 0;
+}
+
+.file-info {
+    flex: 1;
+}
+
+.file-info h3 {
+    font-size: 1.1rem;
+    color: white;
+    margin-bottom: 3px;
+}
+
+.file-info p {
+    font-size: 0.9rem;
+    color: #a0a0b0;
+    margin-bottom: 6px;
+}
+
+.file-meta {
+    display: flex;
+    gap: 18px;
+    font-size: 0.8rem;
+    color: #707080;
+}
+
+.file-meta span {
+    background: rgba(255,255,255,0.05);
+    padding: 2px 12px;
+    border-radius: 20px;
+}
+
+.file-arrow {
+    font-size: 1.4rem;
+    color: #6c63ff;
+    opacity: 0.4;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.file-item:hover .file-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+.upload-info {
+    text-align: center;
+    margin-top: 40px;
+    color: #606070;
+    font-size: 0.95rem;
+}
+
+.upload-info a {
+    color: #6c63ff;
+    text-decoration: none;
+}
+
+.upload-info a:hover {
+    text-decoration: underline;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .file-item {
+        flex-wrap: wrap;
+        padding: 15px;
+    }
+    .file-meta {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .file-arrow {
+        display: none;
+    }
+    .folder-header h1 {
+        font-size: 1.8rem;
+    }
+}
