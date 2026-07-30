@@ -1,63 +1,65 @@
 // ============================================================
-// ESPERAR A QUE LA INTRO TERMINE
+// SCRIPT COMPLETO - Luis Diosvan
+// ============================================================
+
+// ============================================================
+// 1. ESPERAR A QUE LA INTRO TERMINE
 // ============================================================
 (function() {
-    // Si existe la intro, ocultamos el body hasta que termine
     const overlay = document.getElementById('introOverlay');
     if (overlay) {
-        // El body ya tiene fadeIn, pero lo pausamos
         document.body.style.animation = 'none';
         document.body.style.opacity = '0';
         
         document.addEventListener('introComplete', function() {
-            // Restaurar animación
-            document.body.style.animation = 'fadeIn 0.8s ease-out forwards';
+            document.body.style.animation = 'fadeIn 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards';
             document.body.style.opacity = '0';
         });
         
-        // Fallback: si la intro no se dispara en 6 segundos, mostramos
         setTimeout(() => {
             if (overlay && !overlay.classList.contains('hidden')) {
                 overlay.classList.add('hidden');
-                document.body.style.animation = 'fadeIn 0.8s ease-out forwards';
+                document.body.style.animation = 'fadeIn 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards';
                 document.body.style.opacity = '0';
             }
         }, 6000);
     }
 })();
+
 // ============================================================
-// MENÚ HAMBURGUESA
+// 2. MENÚ HAMBURGUESA
 // ============================================================
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     const toggle = document.getElementById('menuToggle');
     const navLinks = document.querySelector('.nav-links');
 
     if (toggle && navLinks) {
-        toggle.addEventListener('click', () => {
+        toggle.addEventListener('click', function() {
             navLinks.classList.toggle('open');
         });
 
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
+        navLinks.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
                 navLinks.classList.remove('open');
             });
         });
     }
 
     // ============================================================
-    // AÑO EN FOOTER
+    // 3. AÑO EN FOOTER
     // ============================================================
     const footerYear = document.querySelector('footer .footer-copy p');
     if (footerYear) {
         const year = new Date().getFullYear();
-        footerYear.textContent = `© ${year} Luis Diosvan · Hecho con ❤️ y código`;
+        footerYear.textContent = '\u00a9 ' + year + ' Luis Diosvan · Hecho con ❤️ y código';
     }
 
     // ============================================================
-    // SCROLL SUAVE (solo en index)
+    // 4. SCROLL SUAVE (solo en index)
     // ============================================================
-    if (window.location.pathname.includes('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/')) {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    const path = window.location.pathname;
+    if (path.includes('index.html') || path === '/' || path.endsWith('/') || path === '') {
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
                 if (href === '#') return;
@@ -71,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ============================================================
-    // PARTÍCULAS
+    // 5. PARTÍCULAS DE FONDO
     // ============================================================
     function createParticles() {
         const container = document.getElementById('particles-container');
@@ -88,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             particle.style.width = size + 'px';
             particle.style.height = size + 'px';
             particle.style.background = color;
-            particle.style.boxShadow = `0 0 ${size * 2}px ${color}40`;
+            particle.style.boxShadow = '0 0 ' + (size * 2) + 'px ' + color + '40';
             particle.style.left = Math.random() * 100 + '%';
             particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
             particle.style.animationDelay = (Math.random() * 10) + 's';
@@ -98,11 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
     createParticles();
 
     // ============================================================
-    // CONTADOR ANIMADO (solo en index)
+    // 6. CONTADOR ANIMADO (solo en index)
     // ============================================================
     if (document.querySelector('[data-count]')) {
         const counters = document.querySelectorAll('[data-count]');
-        counters.forEach(counter => {
+        counters.forEach(function(counter) {
             const target = parseInt(counter.getAttribute('data-count'));
             const duration = 2000;
             const startTime = performance.now();
@@ -119,8 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
                     if (entry.isIntersecting) {
                         requestAnimationFrame(updateCounter);
                         observer.disconnect();
@@ -132,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ============================================================
-    // TEXTO DINÁMICO (solo en index)
+    // 7. TEXTO DINÁMICO (solo en index)
     // ============================================================
     const dynamicText = document.getElementById('dynamic-text');
     if (dynamicText) {
@@ -144,11 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
             'código que resuelve problemas'
         ];
         let index = 0;
-        setInterval(() => {
+        setInterval(function() {
             index = (index + 1) % phrases.length;
             dynamicText.style.opacity = '0';
             dynamicText.style.transform = 'translateY(-10px)';
-            setTimeout(() => {
+            setTimeout(function() {
                 dynamicText.textContent = phrases[index];
                 dynamicText.style.opacity = '1';
                 dynamicText.style.transform = 'translateY(0)';
@@ -160,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ============================================================
-    // SELECTOR DE TEMAS
+    // 8. SELECTOR DE TEMAS
     // ============================================================
     function initThemeSelector() {
         const buttons = document.querySelectorAll('.theme-btn');
@@ -169,8 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
         html.setAttribute('data-theme', savedTheme);
         updateActiveButton(savedTheme);
         
-        buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
+        buttons.forEach(function(btn) {
+            btn.addEventListener('click', function() {
                 const theme = btn.getAttribute('data-theme');
                 html.setAttribute('data-theme', theme);
                 localStorage.setItem('theme', theme);
@@ -180,33 +182,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         function updateActiveButton(theme) {
-            buttons.forEach(b => {
-                b.classList.toggle('active', b.getAttribute('data-theme') === theme);
+            buttons.forEach(function(b) {
+                if (b.getAttribute('data-theme') === theme) {
+                    b.classList.add('active');
+                } else {
+                    b.classList.remove('active');
+                }
             });
         }
     }
     initThemeSelector();
 
     // ============================================================
-    // CURSOR NEÓN (solo en desktop)
+    // 9. CURSOR NEÓN (solo en desktop)
     // ============================================================
     if (window.innerWidth > 768) {
         const glow = document.createElement('div');
-        glow.style.cssText = `
-            position: fixed;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(124,107,255,0.04) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-            transform: translate(-50%, -50%);
-            will-change: transform;
-        `;
+        glow.style.cssText = 'position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(124,107,255,0.04) 0%,transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);will-change:transform;';
         document.body.appendChild(glow);
         let mouseX = 0, mouseY = 0;
         let currentX = 0, currentY = 0;
-        document.addEventListener('mousemove', (e) => {
+        document.addEventListener('mousemove', function(e) {
             mouseX = e.clientX;
             mouseY = e.clientY;
         });
@@ -221,13 +217,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ============================================================
-    // REVELADO DE TARJETAS
+    // 10. REVELADO DE TARJETAS AL HACER SCROLL
     // ============================================================
     const cards = document.querySelectorAll('.service-card, .tool-card, .testimonial-card, .file-item');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry, index) {
             if (entry.isIntersecting) {
-                setTimeout(() => {
+                setTimeout(function() {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
                 }, index * 80);
@@ -236,12 +232,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
     
-    cards.forEach((card, i) => {
+    cards.forEach(function(card, i) {
         card.style.opacity = '0';
         card.style.transform = 'translateY(24px)';
-        card.style.transition = `opacity 0.6s ease ${i * 0.06}s, transform 0.6s ease ${i * 0.06}s`;
+        card.style.transition = 'opacity 0.6s ease ' + (i * 0.06) + 's, transform 0.6s ease ' + (i * 0.06) + 's';
         observer.observe(card);
     });
 
-    console.log('🚀 Página cargada con todos los efectos');
-});
+    // ============================================================
+    // 11. EFECTO PARALLAX EN HERO (solo index)
+    // ============================================================
+    const hero = document.querySelector('.hero');
+    if (hero && (path.includes('index.html') || path === '/' || path.endsWith('/') || path === '')) {
+        document.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * 0.3;
+            hero.style.transform = 'translateY(' + rate + 'px)';
+            hero.style.opacity = 1 - (scrolled / 800);
+        }, { passive: true });
+    }
+
+    // ============================================================
+    // 12. EFECTO DE PARPADEO EN BADGES
+    // ============================================================
+    const badges = document.querySelectorAll('.floating-badge');
+    badges.forEach(function(badge, i) {
+        badge.style.animation = 'floatBadge 3s ease-in-out ' + (i * 1) + 's infinite';
+    });
+
+    console.log('\u2705 Luis Diosvan · Página cargada con todos los efectos');
+
+}); // Fin del DOMContentLoaded
