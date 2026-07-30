@@ -1,4 +1,31 @@
 // ============================================================
+// ESPERAR A QUE LA INTRO TERMINE
+// ============================================================
+(function() {
+    // Si existe la intro, ocultamos el body hasta que termine
+    const overlay = document.getElementById('introOverlay');
+    if (overlay) {
+        // El body ya tiene fadeIn, pero lo pausamos
+        document.body.style.animation = 'none';
+        document.body.style.opacity = '0';
+        
+        document.addEventListener('introComplete', function() {
+            // Restaurar animación
+            document.body.style.animation = 'fadeIn 0.8s ease-out forwards';
+            document.body.style.opacity = '0';
+        });
+        
+        // Fallback: si la intro no se dispara en 6 segundos, mostramos
+        setTimeout(() => {
+            if (overlay && !overlay.classList.contains('hidden')) {
+                overlay.classList.add('hidden');
+                document.body.style.animation = 'fadeIn 0.8s ease-out forwards';
+                document.body.style.opacity = '0';
+            }
+        }, 6000);
+    }
+})();
+// ============================================================
 // MENÚ HAMBURGUESA
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
