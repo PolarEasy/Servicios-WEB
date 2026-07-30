@@ -1,18 +1,25 @@
-/* FOLDER HEADER */
+/* ============ FOLDER HEADER ============ */
 .folder-header {
-    padding: 40px 0 20px;
+    padding: 50px 0 20px;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .folder-breadcrumb {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #808090;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .folder-breadcrumb a {
-    color: #6c63ff;
+    color: #7c6bff;
     text-decoration: none;
+    transition: color 0.3s;
+}
+
+.folder-breadcrumb a:hover {
+    color: #a78bfa;
 }
 
 .folder-breadcrumb .current {
@@ -20,51 +27,57 @@
 }
 
 .folder-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+    font-size: 2.6rem;
+    margin-bottom: 12px;
 }
 
 .folder-header p {
     color: #a0a0b0;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
+    max-width: 500px;
+    margin: 0 auto;
+    transition: color 0.4s;
 }
 
-/* FILE LIST */
+/* ============ FILE LIST ============ */
 .file-list {
-    padding: 20px 0 60px;
+    padding: 20px 0 70px;
+    position: relative;
+    z-index: 1;
 }
 
 .file-grid {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    max-width: 750px;
+    gap: 14px;
+    max-width: 760px;
     margin: 0 auto;
 }
 
 .file-item {
     display: flex;
     align-items: center;
-    background: rgba(20, 20, 31, 0.7);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 18px 22px;
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(20, 20, 35, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 20px 26px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.04);
     text-decoration: none;
     color: inherit;
-    transition: background 0.3s, border-color 0.3s, transform 0.2s;
-    gap: 18px;
+    transition: all 0.35s ease;
+    gap: 20px;
 }
 
 .file-item:hover {
-    background: rgba(30, 30, 45, 0.9);
-    border-color: #6c63ff;
-    transform: translateX(6px);
+    background: rgba(30, 30, 45, 0.70);
+    border-color: rgba(124, 107, 255, 0.20);
+    transform: translateX(8px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
 }
 
 .file-icon {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     flex-shrink: 0;
 }
 
@@ -74,62 +87,67 @@
 
 .file-info h3 {
     font-size: 1.1rem;
-    color: white;
-    margin-bottom: 3px;
+    color: #fff;
+    margin-bottom: 4px;
+    transition: color 0.4s;
 }
 
 .file-info p {
     font-size: 0.9rem;
     color: #a0a0b0;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    transition: color 0.4s;
 }
 
 .file-meta {
     display: flex;
-    gap: 18px;
-    font-size: 0.8rem;
+    gap: 16px;
+    font-size: 0.75rem;
     color: #707080;
 }
 
 .file-meta span {
-    background: rgba(255,255,255,0.05);
-    padding: 2px 12px;
-    border-radius: 20px;
+    background: rgba(255,255,255,0.04);
+    padding: 2px 14px;
+    border-radius: 30px;
+    transition: background 0.4s, color 0.4s;
 }
 
 .file-arrow {
     font-size: 1.4rem;
-    color: #6c63ff;
-    opacity: 0.4;
+    color: #7c6bff;
+    opacity: 0.3;
     transition: opacity 0.3s, transform 0.3s;
 }
 
 .file-item:hover .file-arrow {
     opacity: 1;
-    transform: translateX(4px);
+    transform: translateX(6px);
 }
 
 .upload-info {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 48px;
     color: #606070;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 .upload-info a {
-    color: #6c63ff;
+    color: #7c6bff;
     text-decoration: none;
+    transition: color 0.3s;
 }
 
 .upload-info a:hover {
-    text-decoration: underline;
+    color: #a78bfa;
 }
 
-/* RESPONSIVE */
+/* ============ RESPONSIVE ============ */
 @media (max-width: 600px) {
     .file-item {
         flex-wrap: wrap;
-        padding: 15px;
+        padding: 16px 18px;
+        gap: 12px;
     }
     .file-meta {
         flex-wrap: wrap;
@@ -141,4 +159,47 @@
     .folder-header h1 {
         font-size: 1.8rem;
     }
+    .file-icon {
+        font-size: 2rem;
+    }
+}
+
+/* Tema Claro */
+[data-theme="light"] .file-item {
+    background: rgba(255,255,255,0.65);
+    border-color: rgba(0,0,0,0.04);
+}
+
+[data-theme="light"] .file-item:hover {
+    background: rgba(255,255,255,0.80);
+    border-color: rgba(106,89,232,0.15);
+}
+
+[data-theme="light"] .file-info h3 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .file-info p {
+    color: #4a4a5e;
+}
+
+[data-theme="light"] .file-meta span {
+    background: rgba(0,0,0,0.04);
+    color: #6a6a7e;
+}
+
+[data-theme="light"] .folder-breadcrumb .current {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .folder-header p {
+    color: #4a4a5e;
+}
+
+[data-theme="light"] .upload-info {
+    color: #808090;
+}
+
+[data-theme="light"] .file-arrow {
+    color: #6a59e8;
 }
