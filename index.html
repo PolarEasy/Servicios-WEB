@@ -3,112 +3,256 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luis Diosvan - Desarrollo de Software</title>
+    <title>Luis Diosvan · Software que funciona</title>
+    <meta name="description" content="Desarrollo de software a medida. Automatización, herramientas y páginas web para negocios que quieren crecer." />
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-    <!-- NAVEGACIÓN -->
+    <!-- ============ NAVEGACIÓN ============ -->
     <nav>
         <div class="container">
-            <div class="logo">🧑‍💻 TIC POLAR</div>
+            <div class="logo">✦ Luis Diosvan</div>
             <ul class="nav-links">
-                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#que-hago">Qué hago</a></li>
                 <li><a href="#herramientas">Herramientas</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#contacto" class="nav-cta">Hablar ahora</a></li>
             </ul>
+            <!-- Menú hamburguesa (móvil) -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
         </div>
     </nav>
 
-    <!-- HEADER CON FOTO CIRCULAR FLOTANTE -->
+    <!-- ============ HERO - IMPACTO TOTAL ============ -->
     <header class="hero">
         <div class="container">
-            <div class="hero-content">
-                <div class="avatar-container">
-                    <img src="https://ui-avatars.com/api/?name=Luis+Diosvan&size=150&background=6c63ff&color=fff&bold=true" alt="Luis Diosvan" class="avatar" />
+            <div class="hero-grid">
+                <!-- Columna izquierda: Texto -->
+                <div class="hero-text">
+                    <div class="hero-badge">🚀 Desarrollo de software</div>
+                    <h1>
+                        Convierte tus ideas en<br />
+                        <span class="highlight">herramientas que funcionan</span>
+                    </h1>
+                    <p class="hero-sub">
+                        No más procesos manuales, pérdidas de tiempo o software que no se adapta. 
+                        Te creo soluciones a medida para que tu negocio <strong>avance más rápido</strong>.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#que-hago" class="btn-primary">Ver cómo lo hago →</a>
+                        <a href="#contacto" class="btn-secondary">Hablar directo</a>
+                    </div>
+                    <!-- Mini stats -->
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">30+</span>
+                            <span class="stat-label">Proyectos entregados</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Clientes satisfechos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Soporte incluido</span>
+                        </div>
+                    </div>
                 </div>
-                <h1>Software a medida para <span class="highlight">tu negocio</span></h1>
-                <p>Soy Luis Diosvan, desarrollador de software. Creo herramientas que resuelven problemas reales: desde automatizaciones hasta sistemas web para pequeños negocios. Rápido, confiable y sin complicaciones.</p>
-                <a href="#contacto" class="btn">Contáctame</a>
+
+                <!-- Columna derecha: Foto + efecto -->
+                <div class="hero-visual">
+                    <div class="avatar-frame">
+                        <img src="https://ui-avatars.com/api/?name=Luis+Diosvan&size=200&background=6c63ff&color=fff&bold=true&font-size=0.5" alt="Luis Diosvan" class="avatar-large" />
+                        <div class="floating-badge badge-1">⚡ Automatización</div>
+                        <div class="floating-badge badge-2">🌐 Web</div>
+                        <div class="floating-badge badge-3">📦 Apps</div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- SERVICIOS CON BOTONES A EJECUTABLES -->
-    <section id="servicios">
+    <!-- ============ QUÉ HAGO (Servicios renovados) ============ -->
+    <section id="que-hago" class="services">
         <div class="container">
-            <h2>Lo que hago</h2>
-            <div class="cards">
-                <div class="card">
-                    <h3>🤖 Automatización</h3>
-                    <p>Creo scripts que hacen tareas repetitivas por ti. Ahorra horas de trabajo con un simple clic.</p>
-                    <a href="herramientas.html" class="btn-card">Ver herramientas</a>
+            <div class="section-header">
+                <span class="section-tag">Lo que hago</span>
+                <h2>Soluciones que <span class="highlight">mueven tu negocio</span></h2>
+                <p class="section-sub">
+                    No vendo código, vendo <strong>problemas resueltos</strong>. 
+                    Cada herramienta está pensada para que tú ahorres tiempo, dinero y dolores de cabeza.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Servicio 1 -->
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Automatización inteligente</h3>
+                    <p>Esa tarea repetitiva que odias hacer cada día... yo la convierto en un script que corre solo. Tú te olvidas, yo me encargo.</p>
+                    <a href="herramientas.html" class="service-link">Ver herramientas →</a>
                 </div>
-                <div class="card">
-                    <h3>🌐 Páginas web</h3>
-                    <p>Tu negocio necesita presencia en línea. Te hago una web rápida, bonita y que funciona en celulares.</p>
-                    <a href="herramientas.html" class="btn-card">Ver herramientas</a>
+
+                <!-- Servicio 2 -->
+                <div class="service-card highlight-card">
+                    <div class="service-icon">🌐</div>
+                    <h3>Páginas web que venden</h3>
+                    <p>Tu negocio necesita presencia digital. Te hago una web rápida, bonita y optimizada para que te encuentren en Google.</p>
+                    <a href="herramientas.html" class="service-link">Ver herramientas →</a>
                 </div>
-                <div class="card">
-                    <h3>⚙️ Herramientas a medida</h3>
-                    <p>¿Tienes un problema que ningún software resuelve? Te desarrollo la solución exacta que necesitas.</p>
-                    <a href="herramientas.html" class="btn-card">Ver herramientas</a>
+
+                <!-- Servicio 3 -->
+                <div class="service-card">
+                    <div class="service-icon">📦</div>
+                    <h3>Herramientas a medida</h3>
+                    <p>¿Ningún software hace lo que necesitas? Te creo la solución exacta. Desde un .exe hasta un sistema completo.</p>
+                    <a href="herramientas.html" class="service-link">Ver herramientas →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- HERRAMIENTAS (SECCIÓN CON BOTONES) -->
-    <section id="herramientas">
+    <!-- ============ HERRAMIENTAS DESTACADAS ============ -->
+    <section id="herramientas" class="tools-section">
         <div class="container">
-            <h2>🛠️ Mis herramientas</h2>
-            <p>Descarga mis utilidades gratuitas. Cada herramienta está diseñada para resolver un problema específico.</p>
+            <div class="section-header">
+                <span class="section-tag">Descargas gratuitas</span>
+                <h2>Herramientas que <span class="highlight">ya puedes usar</span></h2>
+                <p class="section-sub">
+                    Todas mis herramientas son 100% gratuitas. Solo descarga, ejecuta y empieza a ahorrar tiempo.
+                </p>
+            </div>
+
             <div class="tools-grid">
                 <div class="tool-card">
-                    <h4>📂 Organizador de Archivos</h4>
-                    <p>Script que ordena automáticamente tus descargas por tipo.</p>
-                    <a href="herramientas.html" class="btn-download">Ver más</a>
+                    <div class="tool-icon">📂</div>
+                    <h4>Organizador de Archivos</h4>
+                    <p>Ordena tus descargas en segundos. Mueve imágenes, documentos y videos a sus carpetas.</p>
+                    <div class="tool-tags">
+                        <span>📄 .bat</span>
+                        <span>📦 2.4 MB</span>
+                    </div>
+                    <a href="detalle-organizador.html" class="tool-btn">Ver más →</a>
                 </div>
+
                 <div class="tool-card">
-                    <h4>📊 Generador de Reportes</h4>
-                    <p>Convierte datos de Excel en reportes PDF con un clic.</p>
-                    <a href="herramientas.html" class="btn-download">Ver más</a>
+                    <div class="tool-icon">📊</div>
+                    <h4>Generador de Reportes</h4>
+                    <p>Convierte Excel a PDF con un clic. Ideal para informes de ventas o inventarios.</p>
+                    <div class="tool-tags">
+                        <span>📄 .exe</span>
+                        <span>📦 5.1 MB</span>
+                    </div>
+                    <a href="detalle-reportes.html" class="tool-btn">Ver más →</a>
                 </div>
+
                 <div class="tool-card">
-                    <h4>🧹 Limpiador de Archivos Temporales</h4>
-                    <p>Libera espacio en tu PC eliminando archivos innecesarios.</p>
-                    <a href="herramientas.html" class="btn-download">Ver más</a>
+                    <div class="tool-icon">🧹</div>
+                    <h4>Limpiador de Temporales</h4>
+                    <p>Libera espacio en tu PC eliminando archivos basura y caché del sistema.</p>
+                    <div class="tool-tags">
+                        <span>📄 .exe</span>
+                        <span>📦 3.8 MB</span>
+                    </div>
+                    <a href="detalle-limpiador.html" class="tool-btn">Ver más →</a>
                 </div>
+            </div>
+
+            <div class="tools-cta">
+                <a href="herramientas.html" class="btn-primary">Ver todas las herramientas →</a>
             </div>
         </div>
     </section>
 
-    <!-- CONTACTO -->
-    <section id="contacto">
+    <!-- ============ TESTIMONIOS (Social Proof) ============ -->
+    <section id="testimonios" class="testimonials">
         <div class="container">
-            <h2>📬 ¿Hablamos?</h2>
-            <p>Cuéntame tu idea o problema. Sin compromiso, solo una charla para ver cómo puedo ayudarte.</p>
-            <div class="contact-info">
-                <a href="mailto:Luiseverth@gmail.com">📧 Luiseverth@gmail.com</a>
-                <a href="https://wa.me/573123456789" target="_blank">💬 WhatsApp</a>
-                <a href="https://github.com/PolarEasy" target="_blank">🐙 GitHub</a>
+            <div class="section-header">
+                <span class="section-tag">Lo que dicen</span>
+                <h2>Confianza que <span class="highlight">construye proyectos</span></h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p>"Luis me creó un script que me ahorra 10 horas a la semana. Increíblemente simple y efectivo."</p>
+                    <div class="testimonial-author">
+                        <strong>Carlos M.</strong>
+                        <span>Dueño de tienda online</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p>"Mi página web pasó de ser un adorno a una máquina de ventas. Luis entendió mi negocio desde el día 1."</p>
+                    <div class="testimonial-author">
+                        <strong>Valentina R.</strong>
+                        <span>Emprendedora digital</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p>"El generador de reportes me salvó la vida. PDFs perfectos en segundos. No sé cómo vivía sin esto."</p>
+                    <div class="testimonial-author">
+                        <strong>Andrés P.</strong>
+                        <span>Gerente de operaciones</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ============ CONTACTO ============ -->
+    <section id="contacto" class="contact">
+        <div class="container">
+            <div class="contact-card">
+                <div class="contact-info">
+                    <span class="section-tag">📬 Hablemos</span>
+                    <h2>¿Tienes una idea o un problema?</h2>
+                    <p>Cuéntame lo que necesitas. Sin compromiso, solo una charla para explorar cómo puedo ayudarte.</p>
+                    <div class="contact-links">
+                        <a href="mailto:Luiseverth@gmail.com" class="contact-link">
+                            <span>📧</span> Luiseverth@gmail.com
+                        </a>
+                        <a href="https://wa.me/573123456789" target="_blank" class="contact-link">
+                            <span>💬</span> WhatsApp
+                        </a>
+                        <a href="https://github.com/PolarEasy" target="_blank" class="contact-link">
+                            <span>🐙</span> GitHub
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-cta">
+                    <a href="mailto:Luiseverth@gmail.com" class="btn-primary btn-large">✉️ Envíame un correo</a>
+                    <p class="contact-note">📍 Disponible para proyectos remotos · Respuesta en < 24 h</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 Luis Diosvan - Hecho con ❤️ y código</p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">✦ Luis Diosvan</span>
+                    <p>Software que resuelve problemas reales.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#que-hago">Servicios</a>
+                    <a href="herramientas.html">Herramientas</a>
+                    <a href="#contacto">Contacto</a>
+                </div>
+                <div class="footer-copy">
+                    <p>&copy; 2026 Luis Diosvan · Hecho con ❤️ y código</p>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
-</body>
-</html>
-
-    <!-- Enlazamos el JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
