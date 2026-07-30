@@ -1,43 +1,50 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Herramientas - Luis Diosvan</title>
+    <title>Herramientas · Luis Diosvan</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="herramientas.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-    <!-- NAVEGACIÓN -->
+    <div id="particles-container"></div>
+
+    <div class="theme-selector">
+        <button class="theme-btn" data-theme="dark" title="Modo Oscuro">🌙</button>
+        <button class="theme-btn" data-theme="light" title="Modo Claro">☀️</button>
+        <button class="theme-btn" data-theme="amber" title="Modo Ámbar">🟠</button>
+        <button class="theme-btn" data-theme="aurora" title="Modo Aurora">🌌</button>
+    </div>
+
     <nav>
         <div class="container">
-            <div class="logo"><a href="index.html" style="text-decoration:none;color:#6c63ff;">🧑‍💻 Luis Diosvan</a></div>
+            <div class="logo"><a href="index.html" style="text-decoration:none;color:inherit;">✦ Luis Diosvan</a></div>
             <ul class="nav-links">
-                <li><a href="index.html#servicios">Servicios</a></li>
+                <li><a href="index.html#que-hago">Qué hago</a></li>
                 <li><a href="herramientas.html">Herramientas</a></li>
-                <li><a href="index.html#contacto">Contacto</a></li>
+                <li><a href="index.html#testimonios">Testimonios</a></li>
+                <li><a href="index.html#contacto" class="nav-cta">Hablar ahora</a></li>
             </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
         </div>
     </nav>
 
-    <!-- ENCABEZADO DE CARPETA -->
     <section class="folder-header">
         <div class="container">
             <div class="folder-breadcrumb">
-                <span>📁 <a href="index.html">Inicio</a> > <span class="current">Herramientas</span></span>
+                <span>📁 <a href="index.html">Inicio</a> › <span class="current">Herramientas</span></span>
             </div>
             <h1>📂 Mis herramientas</h1>
             <p>Selecciona una herramienta para ver los detalles y descargarla.</p>
         </div>
     </section>
 
-    <!-- LISTA DE ARCHIVOS ESTILO CARPETA -->
     <section class="file-list">
         <div class="container">
             <div class="file-grid">
-                <!-- Archivo 1 -->
                 <a href="detalle-organizador.html" class="file-item">
                     <div class="file-icon">📁</div>
                     <div class="file-info">
@@ -52,7 +59,6 @@
                     <div class="file-arrow">→</div>
                 </a>
 
-                <!-- Archivo 2 -->
                 <a href="detalle-reportes.html" class="file-item">
                     <div class="file-icon">📁</div>
                     <div class="file-info">
@@ -67,7 +73,6 @@
                     <div class="file-arrow">→</div>
                 </a>
 
-                <!-- Archivo 3 -->
                 <a href="detalle-limpiador.html" class="file-item">
                     <div class="file-icon">📁</div>
                     <div class="file-info">
@@ -83,17 +88,28 @@
                 </a>
             </div>
 
-            <!-- Botón para subir más herramientas (placeholder) -->
             <div class="upload-info">
-                <p>🔒 ¿Quieres subir tu propia herramienta? <a href="#contacto">Contáctame</a></p>
+                <p>🔒 ¿Quieres subir tu propia herramienta? <a href="index.html#contacto">Contáctame</a></p>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 Luis Diosvan - Hecho con ❤️ y código</p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">✦ Luis Diosvan</span>
+                    <p>Software que resuelve problemas reales.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html#que-hago">Servicios</a>
+                    <a href="herramientas.html">Herramientas</a>
+                    <a href="index.html#contacto">Contacto</a>
+                </div>
+                <div class="footer-copy">
+                    <p>&copy; 2026 Luis Diosvan · Hecho con ❤️ y código</p>
+                </div>
+            </div>
         </div>
     </footer>
 
