@@ -59,4 +59,233 @@
 .detail-version {
     background: rgba(124, 107, 255, 0.12);
     color: #7c6bff;
+    padding: 4px 18px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background 0.4s, color 0.4s;
+}
+
+.detail-body {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.detail-description h3 {
+    color: #7c6bff;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    transition: color 0.4s;
+}
+
+.detail-description p {
+    color: #c0c0d0;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    transition: color 0.4s;
+}
+
+.detail-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    background: rgba(0,0,0,0.15);
+    padding: 22px 24px;
+    border-radius: 16px;
+    transition: background 0.4s;
+}
+
+.spec-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.spec-label {
+    font-size: 0.7rem;
+    color: #707080;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    transition: color 0.4s;
+}
+
+.spec-value {
+    font-size: 1rem;
+    color: #e0e0e0;
+    font-weight: 500;
+    transition: color 0.4s;
+}
+
+.detail-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.btn-download-large {
+    background: #7c6bff;
+    color: #fff;
+    padding: 16px 48px;
+    border-radius: 60px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 8px 32px rgba(124, 107, 255, 0.20);
+    display: inline-block;
+}
+
+.btn-download-large:hover {
+    background: #6a59e8;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(124, 107, 255, 0.30);
+}
+
+.btn-back {
+    background: rgba(255,255,255,0.04);
+    color: #a0a0b0;
+    padding: 16px 34px;
+    border-radius: 60px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s, color 0.3s;
+    display: inline-block;
+}
+
+.btn-back:hover {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 600px) {
+    .detail-card {
+        padding: 28px 20px;
+        border-radius: 20px;
+    }
+    .detail-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .detail-header h1 {
+        font-size: 1.5rem;
+    }
+    .detail-specs {
+        grid-template-columns: 1fr 1fr;
+        padding: 16px;
+    }
+    .detail-actions {
+        flex-direction: column;
+    }
+    .btn-download-large {
+        text-align: center;
+        padding: 14px 28px;
+        font-size: 0.95rem;
+    }
+    .btn-back {
+        text-align: center;
+        padding: 14px 28px;
+    }
+}
+
+/* ============ TEMAS ============ */
+[data-theme="light"] .detail-card {
+    background: rgba(255,255,255,0.70);
+    border-color: rgba(0,0,0,0.04);
+}
+
+[data-theme="light"] .detail-header h1 {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .detail-description p {
+    color: #4a4a5e;
+}
+
+[data-theme="light"] .detail-description h3 {
+    color: #6a59e8;
+}
+
+[data-theme="light"] .detail-specs {
+    background: rgba(0,0,0,0.04);
+}
+
+[data-theme="light"] .spec-label {
+    color: #808090;
+}
+
+[data-theme="light"] .spec-value {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .detail-version {
+    color: #6a59e8;
+    background: rgba(106,89,232,0.10);
+}
+
+[data-theme="light"] .btn-download-large {
+    background: #6a59e8;
+    box-shadow: 0 8px 32px rgba(106,89,232,0.20);
+}
+
+[data-theme="light"] .btn-download-large:hover {
+    background: #5a49d8;
+}
+
+[data-theme="light"] .btn-back {
+    color: #4a4a5e;
+    background: rgba(0,0,0,0.04);
+}
+
+[data-theme="light"] .btn-back:hover {
+    background: rgba(0,0,0,0.08);
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .breadcrumb span {
+    color: #1a1a2e;
+}
+
+/* Tema Ámbar */
+[data-theme="amber"] .detail-version {
+    color: #f5a623;
+    background: rgba(245,166,35,0.12);
+}
+
+[data-theme="amber"] .detail-description h3 {
+    color: #f5a623;
+}
+
+[data-theme="amber"] .btn-download-large {
+    background: #f5a623;
+    box-shadow: 0 8px 32px rgba(245,166,35,0.20);
+}
+
+[data-theme="amber"] .btn-download-large:hover {
+    background: #e0951a;
+}
+
+/* Tema Aurora */
+[data-theme="aurora"] .detail-version {
+    color: #00d4ff;
+    background: rgba(0,212,255,0.12);
+}
+
+[data-theme="aurora"] .detail-description h3 {
+    color: #00d4ff;
+}
+
+[data-theme="aurora"] .btn-download-large {
+    background: linear-gradient(135deg, #00d4ff, #7b61ff);
+    box-shadow: 0 8px 32px rgba(0,212,255,0.15);
+}
+
+[data-theme="aurora"] .btn-download-large:hover {
+    background: linear-gradient(135deg, #00c0e8, #6a50ee);
+}
+
+.detail-version {
+    background: rgba(124, 107, 255, 0.12);
+    color: #7c6bff;
     padding: 4px 18px
