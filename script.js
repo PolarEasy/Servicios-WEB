@@ -1,11 +1,12 @@
 // ============================================================
-// SCRIPT COMPLETO - Luis Diosvan
-// ===========================================================
+// SCRIPT COMPLETO - Luis Diosvan (SIN INTRO)
+// ============================================================
 
-// ============================================================
-// 2. MENÚ HAMBURGUESA
-// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
+
+    // ============================================================
+    // 1. MENÚ HAMBURGUESA
+    // ============================================================
     const toggle = document.getElementById('menuToggle');
     const navLinks = document.querySelector('.nav-links');
 
@@ -22,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================================
-    // 3. AÑO EN FOOTER
+    // 2. AÑO EN FOOTER
     // ============================================================
     const footerYear = document.querySelector('footer .footer-copy p');
     if (footerYear) {
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================================
-    // 4. SCROLL SUAVE (solo en index)
+    // 3. SCROLL SUAVE (solo en index)
     // ============================================================
     const path = window.location.pathname;
     if (path.includes('index.html') || path === '/' || path.endsWith('/') || path === '') {
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================================
-    // 5. PARTÍCULAS DE FONDO
+    // 4. PARTÍCULAS DE FONDO
     // ============================================================
     function createParticles() {
         const container = document.getElementById('particles-container');
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     createParticles();
 
     // ============================================================
-    // 6. CONTADOR ANIMADO (solo en index)
+    // 5. CONTADOR ANIMADO (solo en index)
     // ============================================================
     if (document.querySelector('[data-count]')) {
         const counters = document.querySelectorAll('[data-count]');
@@ -110,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================================
-    // 7. TEXTO DINÁMICO (solo en index)
+    // 6. TEXTO DINÁMICO (solo en index)
     // ============================================================
     const dynamicText = document.getElementById('dynamic-text');
     if (dynamicText) {
@@ -138,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================================
-    // 8. SELECTOR DE TEMAS
+    // 7. SELECTOR DE TEMAS
     // ============================================================
     function initThemeSelector() {
         const buttons = document.querySelectorAll('.theme-btn');
@@ -170,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initThemeSelector();
 
     // ============================================================
-    // 9. CURSOR NEÓN (solo en desktop)
+    // 8. CURSOR NEÓN (solo en desktop)
     // ============================================================
     if (window.innerWidth > 768) {
         const glow = document.createElement('div');
@@ -193,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================================
-    // 10. REVELADO DE TARJETAS AL HACER SCROLL
+    // 9. REVELADO DE TARJETAS AL HACER SCROLL
     // ============================================================
     const cards = document.querySelectorAll('.service-card, .tool-card, .testimonial-card, .file-item');
     const observer = new IntersectionObserver(function(entries) {
@@ -216,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ============================================================
-    // 11. EFECTO PARALLAX EN HERO (solo index)
+    // 10. EFECTO PARALLAX EN HERO (solo index)
     // ============================================================
     const hero = document.querySelector('.hero');
     if (hero && (path.includes('index.html') || path === '/' || path.endsWith('/') || path === '')) {
@@ -229,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================================
-    // 12. EFECTO DE PARPADEO EN BADGES
+    // 11. EFECTO DE PARPADEO EN BADGES
     // ============================================================
     const badges = document.querySelectorAll('.floating-badge');
     badges.forEach(function(badge, i) {
