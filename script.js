@@ -1,29 +1,40 @@
-// Efecto de escritura en el título (opcional)
+// ============ MENÚ HAMBURGUESA ============
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Página de servicios profesional cargada');
+    const toggle = document.getElementById('menuToggle');
+    const navLinks = document.querySelector('.nav-links');
 
-    // Agregar año automático en el footer
-    const footer = document.querySelector('footer p');
-    if (footer) {
-        const year = new Date().getFullYear();
-        footer.innerHTML = `&copy; ${year} MiDev - Hecho con ❤️ y código`;
+    if (toggle && navLinks) {
+        toggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // Cerrar al hacer clic en un enlace (móvil)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
     }
 
-    // Botones de "Próximamente" - efecto al hacer clic
-    const buttons = document.querySelectorAll('.btn-download');
-    buttons.forEach(btn => {
-        if (btn.textContent === 'Próximamente') {
-            btn.addEventListener('click', (e) => {
+    // ============ AÑO EN FOOTER ============
+    const footerYear = document.querySelector('footer .footer-copy p');
+    if (footerYear) {
+        const year = new Date().getFullYear();
+        footerYear.textContent = `© ${year} Luis Diosvan · Hecho con ❤️ y código`;
+    }
+
+    // ============ SCROLL SUAVE (opcional) ============
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            const target = document.querySelector(href);
+            if (target) {
                 e.preventDefault();
-                btn.textContent = '🚀 En desarrollo...';
-                btn.style.background = '#6c63ff';
-                btn.style.color = 'white';
-                setTimeout(() => {
-                    btn.textContent = 'Próximamente';
-                    btn.style.background = '#1e1e2a';
-                    btn.style.color = '#a0a0b0';
-                }, 2000);
-            });
-        }
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     });
+
+    console.log('🚀 Página de Luis Diosvan cargada con éxito');
 });
