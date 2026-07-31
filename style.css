@@ -147,13 +147,13 @@ p {
 
 .highlight-wrapper .highlight {
     display: block;
-    font-size: 1.8em !important;
-    /* Aún más grande */
+    font-size: 3.6em !important;
+    /* TRIPLE de grande (1.8em × 2 = 3.6em) */
     font-weight: 800;
     line-height: 1.1;
     word-break: break-word;
-    min-height: 6.2rem;
-    max-height: 6.2rem;
+    min-height: 9rem;
+    max-height: 9rem;
     overflow: hidden;
     letter-spacing: -0.02em;
 }
