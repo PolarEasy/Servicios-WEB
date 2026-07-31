@@ -1339,3 +1339,51 @@ footer {
         min-height: 100px;
     }
 }
+/* ================================================================
+   CONTENEDOR FIJO PARA TEXTO DINÁMICO (EVITA MOVIMIENTO)
+   ================================================================ */
+.highlight-wrapper {
+    display: inline-block;
+    min-width: 320px;
+    /* Ancho fijo para la frase más larga */
+    min-height: 3.5rem;
+    /* Altura fija para que no se mueva */
+    vertical-align: bottom;
+}
+
+.highlight-wrapper .highlight {
+    display: inline-block;
+    white-space: nowrap;
+    /* Evita que el texto se rompa */
+    font-size: inherit;
+}
+
+/* Ajuste para tablets */
+@media (max-width: 768px) {
+    .highlight-wrapper {
+        min-width: 280px;
+        min-height: 3rem;
+    }
+}
+
+/* Ajuste para móviles */
+@media (max-width: 600px) {
+    .highlight-wrapper {
+        min-width: 220px;
+        min-height: 2.6rem;
+    }
+    .highlight-wrapper .highlight {
+        font-size: 0.9em;
+    }
+}
+
+/* Ajuste para móviles muy pequeños */
+@media (max-width: 400px) {
+    .highlight-wrapper {
+        min-width: 180px;
+        min-height: 2.2rem;
+    }
+    .highlight-wrapper .highlight {
+        font-size: 0.85em;
+    }
+}
