@@ -1,27 +1,41 @@
+<!-- ============================================================ -->
+<!-- ============ DECLARACIÓN DEL DOCUMENTO ============ -->
+<!-- ============================================================ -->
 <!DOCTYPE html>
 <html lang="es" data-theme="dark">
+
+<!-- ============================================================ -->
+<!-- ============ HEAD - METADATOS Y RECURSOS ============ -->
+<!-- ============================================================ -->
 <head>
+    <!-- ===== CODIFICACIÓN Y VIEWPORT ===== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luis Diosvan · Software que funciona</title>
+
+    <!-- ===== TÍTULO Y DESCRIPCIÓN SEO ===== -->
+    <title>Luis Diosvan · Software de imaginacion hecho realidad</title>
     <meta name="description" content="Desarrollo de software a medida. Automatización, herramientas y páginas web para negocios que quieren crecer." />
-    <head>
-    <!-- ... tus meta tags ... -->
+
+    <!-- ===== HOJAS DE ESTILO ===== -->
     <link rel="stylesheet" href="style.css" />
-    
-    <!-- ... -->
+
+    <!-- ===== FUENTE DE GOOGLE ===== -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
 </head>
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet"/>
-</head>
+
+<!-- ============================================================ -->
+<!-- ============ BODY - CONTENIDO VISIBLE ============ -->
+<!-- ============================================================ -->
 <body>
 
-    <!-- PARTICULAS DE FONDO -->
-    <div id="particles-container"></div>
-    <!-- PARTICULAS DE FONDO -->
+    <!-- ========================================================== -->
+    <!-- ============ 1. PARTICULAS DE FONDO ============ -->
+    <!-- ========================================================== -->
     <div id="particles-container"></div>
 
-    <!-- SELECTOR DE TEMAS (ARRIBA DERECHA) -->
+    <!-- ========================================================== -->
+    <!-- ============ 2. SELECTOR DE TEMAS c(ARRIBA DERECHA) ============ -->
+    <!-- ========================================================== -->
     <div class="theme-selector">
         <button class="theme-btn" data-theme="dark" title="Modo Oscuro">🌙</button>
         <button class="theme-btn" data-theme="light" title="Modo Claro">☀️</button>
@@ -29,38 +43,59 @@
         <button class="theme-btn" data-theme="aurora" title="Modo Aurora">🌌</button>
     </div>
 
-    <!-- NAVEGACIÓN -->
+    <!-- ========================================================== -->
+    <!-- ============ 3. NAVEGACIÓN ============ -->
+    <!-- ========================================================== -->
     <nav>
         <div class="container">
+            <!-- LOGO -->
             <div class="logo">✦ Luis Diosvan</div>
+
+            <!-- ENLACES DE NAVEGACIÓN -->
             <ul class="nav-links">
-                <li><a href="#que-hago">Qué hago</a></li>
-                <li><a href="#herramientas">Herramientas</a></li>
-                <li><a href="#testimonios">Testimonios</a></li>
-                <li><a href="#contacto" class="nav-cta">Hablar ahora</a></li>
+                <li><a href="#que-hago">Qienes somos</a></li>
+                <li><a href="#herramientas">Software Gratuito</a></li>
+                <li><a href="#testimonios">Comentarios</a></li>
+                <li><a href="#contacto" class="nav-cta">Contacto</a></li>
             </ul>
+
+            <!-- BOTÓN MENÚ HAMBURGUESA (MÓVIL) -->
             <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
         </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- ========================================================== -->
+    <!-- ============ 4. HERO - SECCIÓN PRINCIPAL ============ -->
+    <!-- ========================================================== -->
     <header class="hero">
         <div class="container">
             <div class="hero-grid">
+
+                <!-- ===== COLUMNA IZQUIERDA: TEXTO ===== -->
                 <div class="hero-text">
-                    <div class="hero-badge">🚀 Desarrollo de software</div>
+
+                    <!-- BADGE -->
+                    <div class="hero-badge">Analista y Desarrollor de software</div>
+
+                    <!-- TÍTULO PRINCIPAL CON TEXTO DINÁMICO -->
                     <h1>
                         Convierte tus ideas en<br />
                         <span class="highlight" id="dynamic-text">herramientas que funcionan</span>
                     </h1>
+
+                    <!-- SUBTÍTULO / DESCRIPCIÓN -->
                     <p class="hero-sub">
-                        No más procesos manuales, pérdidas de tiempo o software que no se adapta. 
+                        No más procesos manuales, pérdidas de tiempo o software que no se adapta.
                         Te creo soluciones a medida para que tu negocio <strong>avance más rápido</strong>.
                     </p>
+
+                    <!-- BOTONES DE ACCIÓN -->
                     <div class="hero-actions">
                         <a href="#que-hago" class="btn-primary">Ver cómo lo hago →</a>
-                        <a href="#contacto" class="btn-secondary">Hablar directo</a>
+                        <a href="#contacto" class="btn-secondary">Hablemos y crezcamos tu negocio</a>
                     </div>
+
+                    <!-- ESTADÍSTICAS -->
                     <div class="hero-stats">
                         <div class="stat">
                             <span class="stat-number" data-count="30">0</span><span class="stat-number">+</span>
@@ -77,66 +112,97 @@
                     </div>
                 </div>
 
+                <!-- ===== COLUMNA DERECHA: AVATAR + BADGES FLOTANTES ===== -->
                 <div class="hero-visual">
                     <div class="avatar-frame">
+
+                        <!-- AURA / BRILLO DE FONDO -->
                         <div class="aura-glow"></div>
+
+                        <!-- FOTO DE PERFIL (GENERADA CON API) -->
                         <img src="https://ui-avatars.com/api/?name=Luis+Diosvan&size=200&background=6c63ff&color=fff&bold=true&font-size=0.5" alt="Luis Diosvan" class="avatar-large" />
+
+                        <!-- BADGES FLOTANTES -->
                         <div class="floating-badge badge-1">⚡ Automatización</div>
                         <div class="floating-badge badge-2">🌐 Web</div>
                         <div class="floating-badge badge-3">📦 Apps</div>
+
+                        <!-- ONDAS DE ENERGÍA (ANILLOS) -->
                         <div class="wave-ring ring-1"></div>
                         <div class="wave-ring ring-2"></div>
                         <div class="wave-ring ring-3"></div>
+
                     </div>
                 </div>
+
             </div>
         </div>
     </header>
 
-    <!-- SERVICIOS -->
+    <!-- ========================================================== -->
+    <!-- ============ 5. SERVICIOS - QUÉ HAGO ============ -->
+    <!-- ========================================================== -->
     <section id="que-hago" class="services">
         <div class="container">
+
+            <!-- ENCABEZADO DE SECCIÓN -->
             <div class="section-header">
                 <span class="section-tag">Lo que hago</span>
                 <h2>Soluciones que <span class="highlight">mueven tu negocio</span></h2>
                 <p class="section-sub">
-                    No vendo código, vendo <strong>problemas resueltos</strong>. 
+                    No vendo código, vendo <strong>problemas resueltos</strong>.
                     Cada herramienta está pensada para que tú ahorres tiempo, dinero y dolores de cabeza.
                 </p>
             </div>
 
+            <!-- TARJETAS DE SERVICIOS -->
             <div class="services-grid">
+
+                <!-- SERVICIO 1: AUTOMATIZACIÓN -->
                 <div class="service-card">
                     <div class="service-icon">⚡</div>
                     <h3>Automatización inteligente</h3>
                     <p>Esa tarea repetitiva que odias hacer cada día... yo la convierto en un script que corre solo.</p>
                     <a href="herramientas.html" class="service-link">Ver herramientas →</a>
                 </div>
+
+                <!-- SERVICIO 2: PÁGINAS WEB (DESTACADO) -->
                 <div class="service-card highlight-card">
                     <div class="service-icon">🌐</div>
                     <h3>Páginas web que venden</h3>
                     <p>Tu negocio necesita presencia digital. Te hago una web rápida, bonita y optimizada.</p>
                     <a href="herramientas.html" class="service-link">Ver herramientas →</a>
                 </div>
+
+                <!-- SERVICIO 3: HERRAMIENTAS A MEDIDA -->
                 <div class="service-card">
                     <div class="service-icon">📦</div>
                     <h3>Herramientas a medida</h3>
                     <p>¿Ningún software hace lo que necesitas? Te creo la solución exacta desde cero.</p>
                     <a href="herramientas.html" class="service-link">Ver herramientas →</a>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- HERRAMIENTAS -->
+    <!-- ========================================================== -->
+    <!-- ============ 6. HERRAMIENTAS - DESCARGAS ============ -->
+    <!-- ========================================================== -->
     <section id="herramientas" class="tools-section">
         <div class="container">
+
+            <!-- ENCABEZADO DE SECCIÓN -->
             <div class="section-header">
                 <span class="section-tag">Descargas gratuitas</span>
                 <h2>Herramientas que <span class="highlight">ya puedes usar</span></h2>
                 <p class="section-sub">Todas mis herramientas son 100% gratuitas. Descarga, ejecuta y ahorra tiempo.</p>
             </div>
+
+            <!-- TARJETAS DE HERRAMIENTAS -->
             <div class="tools-grid">
+
+                <!-- HERRAMIENTA 1: ORGANIZADOR -->
                 <div class="tool-card">
                     <div class="tool-icon">📂</div>
                     <h4>Organizador de Archivos</h4>
@@ -147,6 +213,8 @@
                     </div>
                     <a href="detalle-organizador.html" class="tool-btn">Ver más →</a>
                 </div>
+
+                <!-- HERRAMIENTA 2: GENERADOR DE REPORTES -->
                 <div class="tool-card">
                     <div class="tool-icon">📊</div>
                     <h4>Generador de Reportes</h4>
@@ -157,6 +225,8 @@
                     </div>
                     <a href="detalle-reportes.html" class="tool-btn">Ver más →</a>
                 </div>
+
+                <!-- HERRAMIENTA 3: LIMPIADOR -->
                 <div class="tool-card">
                     <div class="tool-icon">🧹</div>
                     <h4>Limpiador de Temporales</h4>
@@ -167,21 +237,33 @@
                     </div>
                     <a href="detalle-limpiador.html" class="tool-btn">Ver más →</a>
                 </div>
+
             </div>
+
+            <!-- BOTÓN PARA VER TODAS -->
             <div class="tools-cta">
                 <a href="herramientas.html" class="btn-primary">Ver todas las herramientas →</a>
             </div>
+
         </div>
     </section>
 
-    <!-- TESTIMONIOS -->
+    <!-- ========================================================== -->
+    <!-- ============ 7. TESTIMONIOS ============ -->
+    <!-- ========================================================== -->
     <section id="testimonios" class="testimonials">
         <div class="container">
+
+            <!-- ENCABEZADO DE SECCIÓN -->
             <div class="section-header">
                 <span class="section-tag">Lo que dicen</span>
                 <h2>Confianza que <span class="highlight">construye proyectos</span></h2>
             </div>
+
+            <!-- TARJETAS DE TESTIMONIOS -->
             <div class="testimonials-grid">
+
+                <!-- TESTIMONIO 1 -->
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
                     <p>"Luis me creó un script que me ahorra 10 horas a la semana. Increíblemente simple y efectivo."</p>
@@ -190,6 +272,8 @@
                         <span>Dueño de tienda online</span>
                     </div>
                 </div>
+
+                <!-- TESTIMONIO 2 -->
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
                     <p>"Mi página web pasó de ser un adorno a una máquina de ventas."</p>
@@ -198,6 +282,8 @@
                         <span>Emprendedora digital</span>
                     </div>
                 </div>
+
+                <!-- TESTIMONIO 3 -->
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
                     <p>"El generador de reportes me salvó la vida. PDFs perfectos en segundos."</p>
@@ -206,51 +292,77 @@
                         <span>Gerente de operaciones</span>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- CONTACTO -->
+    <!-- ========================================================== -->
+    <!-- ============ 8. CONTACTO ============ -->
+    <!-- ========================================================== -->
     <section id="contacto" class="contact">
         <div class="container">
+
+            <!-- TARJETA DE CONTACTO -->
             <div class="contact-card">
+
+                <!-- COLUMNA IZQUIERDA: INFORMACIÓN -->
                 <div class="contact-info">
                     <span class="section-tag">📬 Hablemos</span>
                     <h2>¿Tienes una idea o un problema?</h2>
                     <p>Cuéntame lo que necesitas. Sin compromiso, solo una charla para explorar cómo puedo ayudarte.</p>
+
+                    <!-- LINKS DE CONTACTO -->
                     <div class="contact-links">
                         <a href="mailto:Luiseverth@gmail.com" class="contact-link">📧 Luiseverth@gmail.com</a>
                         <a href="https://wa.me/573123456789" target="_blank" class="contact-link">💬 WhatsApp</a>
                         <a href="https://github.com/PolarEasy" target="_blank" class="contact-link">🐙 GitHub</a>
                     </div>
                 </div>
+
+                <!-- COLUMNA DERECHA: BOTÓN PRINCIPAL -->
                 <div class="contact-cta">
                     <a href="mailto:Luiseverth@gmail.com" class="btn-primary btn-large">✉️ Envíame un correo</a>
-                    <p class="contact-note">📍 Disponible · Respuesta en < 24 h</p>
+                    <p class="contact-note">📍 Disponible · Respuesta en &lt; 24 h</p>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ========================================================== -->
+    <!-- ============ 9. FOOTER ============ -->
+    <!-- ========================================================== -->
     <footer>
         <div class="container">
             <div class="footer-content">
+
+                <!-- COLUMNA IZQUIERDA: MARCA -->
                 <div class="footer-brand">
                     <span class="logo">✦ Luis Diosvan</span>
                     <p>Software que resuelve problemas reales.</p>
                 </div>
+
+                <!-- COLUMNA CENTRO: ENLACES RÁPIDOS -->
                 <div class="footer-links">
                     <a href="#que-hago">Servicios</a>
                     <a href="herramientas.html">Herramientas</a>
                     <a href="#contacto">Contacto</a>
                 </div>
+
+                <!-- COLUMNA DERECHA: COPYRIGHT -->
                 <div class="footer-copy">
                     <p>&copy; 2026 Luis Diosvan · Hecho con ❤️ y código</p>
                 </div>
+
             </div>
         </div>
     </footer>
+
+    <!-- ========================================================== -->
+    <!-- ============ 10. SCRIPTS ============ -->
+    <!-- ========================================================== -->
     <script src="script.js"></script>
+
 </body>
 </html>
