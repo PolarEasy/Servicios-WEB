@@ -20,19 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const x = e.clientX + (Math.random() - 0.5) * 10;
             const y = e.clientY + (Math.random() - 0.5) * 10;
 
-            particle.style.cssText = `
-                        position: fixed;
-                        width: ${size}px;
-                        height: ${size}px;
-                        background: ${color};
-                        border-radius: 50%;
-                        pointer-events: none;
-                        z-index: 9999;
-                        left: ${x}px;
-                        top: ${y}px;
-                        box-shadow: 0 0 ${size * 2}px ${color};
-                        transition: none;
-                    `;
+            particle.style.cssText =
+                'position:fixed;width:' + size + 'px;height:' + size +
+                'px;background:' + color +
+                ';border-radius:50%;pointer-events:none;z-index:9999;left:' + x + 'px;top:' + y +
+                'px;box-shadow:0 0 ' + (size * 2) + 'px ' + color + ';transition:none;';
 
             document.body.appendChild(particle);
 
@@ -46,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 particle.style.top = (rect.top + dy + 0.5) + 'px';
                 life -= 0.018;
                 particle.style.opacity = life;
-                particle.style.transform = `scale(${life * 1.2}) rotate(${life * 360}deg)`;
+                particle.style.transform = 'scale(' + (life * 1.2) + ') rotate(' + (life * 360) + 'deg)';
 
                 if (life > 0) {
                     requestAnimationFrame(animateParticle);
@@ -92,17 +84,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================================
     if (window.innerWidth > 768) {
         const mouseGlow = document.createElement('div');
-        mouseGlow.style.cssText = `
-                    position: fixed;
-                    width: 300px;
-                    height: 300px;
-                    border-radius: 50%;
-                    background: radial-gradient(circle, rgba(124,107,255,0.05) 0%, transparent 70%);
-                    pointer-events: none;
-                    z-index: 0;
-                    transform: translate(-50%, -50%);
-                    transition: width 0.4s ease, height 0.4s ease;
-                `;
+        mouseGlow.style.cssText =
+            'position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(124,107,255,0.05) 0%,transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);transition:width 0.4s ease,height 0.4s ease;';
         document.body.appendChild(mouseGlow);
 
         let mouseX = 0,
@@ -138,18 +121,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!glow) {
                 glow = document.createElement('div');
                 glow.className = 'mouse-glow';
-                glow.style.cssText = `
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            pointer-events: none;
-                            border-radius: inherit;
-                            background: radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(124,107,255,0.06) 0%, transparent 60%);
-                            opacity: 0;
-                            transition: opacity 0.3s ease;
-                        `;
+                glow.style.cssText =
+                    'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;border-radius:inherit;background:radial-gradient(circle at ' +
+                    (x * 100) + '% ' + (y * 100) +
+                    '%, rgba(124,107,255,0.06) 0%, transparent 60%);opacity:0;transition:opacity 0.3s ease;';
                 card.style.position = 'relative';
                 card.style.overflow = 'hidden';
                 card.appendChild(glow);
@@ -157,8 +132,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             glow.style.setProperty('--mouse-x', x * 100 + '%');
             glow.style.setProperty('--mouse-y', y * 100 + '%');
-            glow.style.background =
-                `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(124,107,255,0.06) 0%, transparent 60%)`;
+            glow.style.background = 'radial-gradient(circle at ' + (x * 100) + '% ' + (y * 100) +
+                '%, rgba(124,107,255,0.06) 0%, transparent 60%)';
             glow.style.opacity = '1';
         });
 
@@ -171,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ============================================================
-    // 5. EFECTO DE "PARPADEO" EN ESTADÍSTICAS (NUEVO)
+    // 5. EFECTO DE "PARPADEO" EN ESTADÍSTICAS
     // ============================================================
     document.querySelectorAll('.stat-number').forEach(function(stat) {
         stat.addEventListener('mouseenter', function() {
@@ -183,10 +158,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ============================================================
-    // 6. EFECTO "CINTA MAGNÉTICA" EN SUBTÍTULOS (solo CSS)
-    // ============================================================
-    // Ya está en el CSS, no necesita JS
-
     console.log('✨ Efectos únicos activados (versión estable)');
+
 });
