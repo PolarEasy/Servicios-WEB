@@ -399,26 +399,4 @@ body::before {
         animation-duration: 8s;
     }
 }
-/* ================================================================
-   WRAPPER PARA SUBTÍTULO - ALTURA FIJA (EVITA MOVIMIENTO)
-   ================================================================ */
-.hero-sub-wrapper {
-    min-height: 80px;
-    /* Altura fija para que no se mueva el contenido */
-    display: flex;
-    align-items: flex-start;
-    width: 100%;
-}
 
-/* Ajuste para que el texto no se salga */
-.hero-sub {
-    margin: 0;
-    width: 100%;
-}
-
-/* Ajuste responsive */
-@media (max-width: 600px) {
-    .hero-sub-wrapper {
-        min-height: 100px;
-    }
-}
