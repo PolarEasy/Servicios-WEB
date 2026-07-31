@@ -1,5 +1,5 @@
 // ============================================================
-// SCRIPT COMPLETO - Luis Diosvan (SIN INTRO)
+// SCRIPT COMPLETO - Luis Diosvan (VERSIÓN ESTABLE)
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function createParticles() {
         const container = document.getElementById('particles-container');
         if (!container) return;
-        
+
         const colors = ['#7c6bff', '#a78bfa', '#6a59e8', '#8b7bfa'];
         const count = 50;
 
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     createParticles();
 
     // ============================================================
-    // 5. CONTADOR ANIMADO (solo en index)
+    // 5. CONTADOR ANIMADO
     // ============================================================
     if (document.querySelector('[data-count]')) {
         const counters = document.querySelectorAll('[data-count]');
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const target = parseInt(counter.getAttribute('data-count'));
             const duration = 2000;
             const startTime = performance.now();
-            
+
             function updateCounter(currentTime) {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     counter.textContent = target;
                 }
             }
-            
+
             const observer = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
                     if (entry.isIntersecting) {
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================================
-    // 6. TEXTO DINÁMICO (solo en index)
+    // 6. TEXTO DINÁMICO (con altura fija para 2 líneas)
     // ============================================================
     const dynamicText = document.getElementById('dynamic-text');
     if (dynamicText) {
@@ -123,16 +123,35 @@ document.addEventListener('DOMContentLoaded', function() {
             'código que resuelve problemas'
         ];
         let index = 0;
+
+        // Forzar que todas las frases tengan el mismo tamaño
+        const wrapper = document.getElementById('highlightWrapper');
+        if (wrapper) {
+            let maxLength = 0;
+            phrases.forEach(function(phrase) {
+                if (phrase.length > maxLength) maxLength = phrase.length;
+            });
+
+            const baseSize = window.innerWidth > 768 ? 1 : 0.85;
+            let fontSize = baseSize;
+            if (maxLength > 35) fontSize = baseSize * 0.85;
+            if (maxLength > 40) fontSize = baseSize * 0.75;
+
+            dynamicText.style.fontSize = fontSize + 'em';
+        }
+
         setInterval(function() {
             index = (index + 1) % phrases.length;
             dynamicText.style.opacity = '0';
-            dynamicText.style.transform = 'translateY(-10px)';
+            dynamicText.style.transform = 'translateY(-8px)';
+
             setTimeout(function() {
                 dynamicText.textContent = phrases[index];
                 dynamicText.style.opacity = '1';
                 dynamicText.style.transform = 'translateY(0)';
             }, 300);
         }, 4000);
+
         dynamicText.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
         dynamicText.style.opacity = '1';
         dynamicText.style.transform = 'translateY(0)';
@@ -147,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const savedTheme = localStorage.getItem('theme') || 'dark';
         html.setAttribute('data-theme', savedTheme);
         updateActiveButton(savedTheme);
-        
+
         buttons.forEach(function(btn) {
             btn.addEventListener('click', function() {
                 const theme = btn.getAttribute('data-theme');
@@ -157,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.style.transition = 'background 0.5s ease, color 0.4s ease';
             });
         });
-        
+
         function updateActiveButton(theme) {
             buttons.forEach(function(b) {
                 if (b.getAttribute('data-theme') === theme) {
@@ -175,14 +194,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================================
     if (window.innerWidth > 768) {
         const glow = document.createElement('div');
-        glow.style.cssText = 'position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(124,107,255,0.04) 0%,transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);will-change:transform;';
+        glow.style.cssText =
+            'position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(124,107,255,0.04) 0%,transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);will-change:transform;';
         document.body.appendChild(glow);
-        let mouseX = 0, mouseY = 0;
-        let currentX = 0, currentY = 0;
+        let mouseX = 0,
+            mouseY = 0;
+        let currentX = 0,
+            currentY = 0;
         document.addEventListener('mousemove', function(e) {
             mouseX = e.clientX;
             mouseY = e.clientY;
         });
+
         function animateGlow() {
             currentX += (mouseX - currentX) * 0.04;
             currentY += (mouseY - currentY) * 0.04;
@@ -208,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-    
+
     cards.forEach(function(card, i) {
         card.style.opacity = '0';
         card.style.transform = 'translateY(24px)';
@@ -217,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ============================================================
-    // 10. EFECTO PARALLAX EN HERO (solo index)
+    // 10. EFECTO PARALLAX EN HERO
     // ============================================================
     const hero = document.querySelector('.hero');
     if (hero && (path.includes('index.html') || path === '/' || path.endsWith('/') || path === '')) {
@@ -234,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================================
     const badges = document.querySelectorAll('.floating-badge');
     badges.forEach(function(badge, i) {
-        badge.style.animation = 'floatBadge 3s ease-in-out ' + (i * 1) + 's infinite';
+        badge.style.animation = 'floatBadgeGlow 2.5s ease-in-out ' + (i * 1.2) + 's infinite';
     });
 
     console.log('\u2705 Luis Diosvan · Página cargada con todos los efectos');
