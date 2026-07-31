@@ -1,5 +1,5 @@
 // ================================================================
-// EFECTOS ÚNICOS - Luis Diosvan (VERSIÓN MEJORADA)
+// EFECTOS ÚNICOS - Luis Diosvan (VERSIÓN ESTABLE)
 // ================================================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(e) {
         const colors = ['#7c6bff', '#a78bfa', '#6a59e8', '#ff6bcd', '#00d4ff', '#f5a623', '#fff'];
         const count = 18;
-        
+
         for (let i = 0; i < count; i++) {
             const particle = document.createElement('div');
             const size = 3 + Math.random() * 7;
@@ -19,27 +19,27 @@ document.addEventListener('DOMContentLoaded', function() {
             const speed = 2 + Math.random() * 6;
             const x = e.clientX + (Math.random() - 0.5) * 10;
             const y = e.clientY + (Math.random() - 0.5) * 10;
-            
+
             particle.style.cssText = `
-                position: fixed;
-                width: ${size}px;
-                height: ${size}px;
-                background: ${color};
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999;
-                left: ${x}px;
-                top: ${y}px;
-                box-shadow: 0 0 ${size * 2}px ${color};
-                transition: none;
-            `;
-            
+                        position: fixed;
+                        width: ${size}px;
+                        height: ${size}px;
+                        background: ${color};
+                        border-radius: 50%;
+                        pointer-events: none;
+                        z-index: 9999;
+                        left: ${x}px;
+                        top: ${y}px;
+                        box-shadow: 0 0 ${size * 2}px ${color};
+                        transition: none;
+                    `;
+
             document.body.appendChild(particle);
-            
+
             const dx = Math.cos(angle) * speed;
             const dy = Math.sin(angle) * speed - 2;
             let life = 1;
-            
+
             function animateParticle() {
                 const rect = particle.getBoundingClientRect();
                 particle.style.left = (rect.left + dx) + 'px';
@@ -47,14 +47,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 life -= 0.018;
                 particle.style.opacity = life;
                 particle.style.transform = `scale(${life * 1.2}) rotate(${life * 360}deg)`;
-                
+
                 if (life > 0) {
                     requestAnimationFrame(animateParticle);
                 } else {
                     particle.remove();
                 }
             }
-            
+
             animateParticle();
         }
     });
@@ -68,14 +68,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('scroll', function() {
         const scrollY = window.pageYOffset;
         const threshold = 400;
-        
+
         if (scrollY > threshold && !tornadoActive) {
             tornadoActive = true;
             const container = document.getElementById('particles-container');
             if (container) {
                 container.classList.add('particle-tornado');
             }
-            
+
             clearTimeout(tornadoTimeout);
             tornadoTimeout = setTimeout(function() {
                 const container = document.getElementById('particles-container');
@@ -93,26 +93,28 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.innerWidth > 768) {
         const mouseGlow = document.createElement('div');
         mouseGlow.style.cssText = `
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(124,107,255,0.05) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-            transform: translate(-50%, -50%);
-            transition: width 0.4s ease, height 0.4s ease;
-        `;
+                    position: fixed;
+                    width: 300px;
+                    height: 300px;
+                    border-radius: 50%;
+                    background: radial-gradient(circle, rgba(124,107,255,0.05) 0%, transparent 70%);
+                    pointer-events: none;
+                    z-index: 0;
+                    transform: translate(-50%, -50%);
+                    transition: width 0.4s ease, height 0.4s ease;
+                `;
         document.body.appendChild(mouseGlow);
-        
-        let mouseX = 0, mouseY = 0;
-        let currentX = 0, currentY = 0;
-        
+
+        let mouseX = 0,
+            mouseY = 0;
+        let currentX = 0,
+            currentY = 0;
+
         document.addEventListener('mousemove', function(e) {
             mouseX = e.clientX;
             mouseY = e.clientY;
         });
-        
+
         function animateMouseGlow() {
             currentX += (mouseX - currentX) * 0.06;
             currentY += (mouseY - currentY) * 0.06;
@@ -131,34 +133,35 @@ document.addEventListener('DOMContentLoaded', function() {
             const rect = card.getBoundingClientRect();
             const x = (e.clientX - rect.left) / rect.width;
             const y = (e.clientY - rect.top) / rect.height;
-            
+
             let glow = card.querySelector('.mouse-glow');
             if (!glow) {
                 glow = document.createElement('div');
                 glow.className = 'mouse-glow';
                 glow.style.cssText = `
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    pointer-events: none;
-                    border-radius: inherit;
-                    background: radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(124,107,255,0.06) 0%, transparent 60%);
-                    opacity: 0;
-                    transition: opacity 0.3s ease;
-                `;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            pointer-events: none;
+                            border-radius: inherit;
+                            background: radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(124,107,255,0.06) 0%, transparent 60%);
+                            opacity: 0;
+                            transition: opacity 0.3s ease;
+                        `;
                 card.style.position = 'relative';
                 card.style.overflow = 'hidden';
                 card.appendChild(glow);
             }
-            
+
             glow.style.setProperty('--mouse-x', x * 100 + '%');
             glow.style.setProperty('--mouse-y', y * 100 + '%');
-            glow.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(124,107,255,0.06) 0%, transparent 60%)`;
+            glow.style.background =
+                `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(124,107,255,0.06) 0%, transparent 60%)`;
             glow.style.opacity = '1';
         });
-        
+
         card.addEventListener('mouseleave', function() {
             const glow = card.querySelector('.mouse-glow');
             if (glow) {
@@ -168,98 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ============================================================
-    // 5. EFECTO "TEXTO QUE ESCRIBE SOLO" (SOLO EN SUBTÍTULOS)
-    // ============================================================
-    const heroSub = document.querySelector('.hero-sub');
-    if (heroSub && window.innerWidth > 768) {
-        const originalText = heroSub.innerHTML;
-        heroSub.innerHTML = '';
-        let index = 0;
-        const chars = originalText.split('');
-        
-        function typeLetter() {
-            if (index < chars.length) {
-                const char = chars[index];
-                if (char === '<') {
-                    let tag = '';
-                    while (chars[index] !== '>') {
-                        tag += chars[index];
-                        index++;
-                    }
-                    tag += chars[index];
-                    heroSub.innerHTML += tag;
-                    index++;
-                } else {
-                    heroSub.innerHTML += char;
-                    index++;
-                }
-                setTimeout(typeLetter, 4 + Math.random() * 8);
-            }
-        }
-        
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    setTimeout(typeLetter, 400);
-                    observer.disconnect();
-                }
-            });
-        });
-        observer.observe(heroSub);
-    }
-
-    // ============================================================
-    // 6. PARTÍCULAS QUE SIGUEN EL MOUSE (mejorado)
-    // ============================================================
-    if (window.innerWidth > 768) {
-        const particleTrail = [];
-        const trailCount = 10;
-        
-        for (let i = 0; i < trailCount; i++) {
-            const p = document.createElement('div');
-            p.style.cssText = `
-                position: fixed;
-                width: ${3 - (i / trailCount) * 1.5}px;
-                height: ${3 - (i / trailCount) * 1.5}px;
-                background: rgba(124,107,255,${0.4 - (i / trailCount) * 0.3});
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 0;
-                transition: none;
-                opacity: 0;
-                will-change: transform;
-            `;
-            document.body.appendChild(p);
-            particleTrail.push({
-                el: p,
-                x: 0,
-                y: 0,
-                delay: i * 0.04
-            });
-        }
-        
-        let mouseX2 = 0, mouseY2 = 0;
-        document.addEventListener('mousemove', function(e) {
-            mouseX2 = e.clientX;
-            mouseY2 = e.clientY;
-        });
-        
-        function animateTrail() {
-            particleTrail.forEach(function(p, i) {
-                const speed = 0.08 + (i / trailCount) * 0.04;
-                p.x += (mouseX2 - p.x) * speed;
-                p.y += (mouseY2 - p.y) * speed;
-                p.el.style.left = p.x + 'px';
-                p.el.style.top = p.y + 'px';
-                p.el.style.opacity = 0.5 - (i / trailCount) * 0.4;
-            });
-            requestAnimationFrame(animateTrail);
-        }
-        animateTrail();
-    }
-
-    // ============================================================
-    // 7. EFECTO DE "PARPADEO" EN ESTADÍSTICAS (NUEVO)
+    // 5. EFECTO DE "PARPADEO" EN ESTADÍSTICAS (NUEVO)
     // ============================================================
     document.querySelectorAll('.stat-number').forEach(function(stat) {
         stat.addEventListener('mouseenter', function() {
@@ -271,5 +183,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    console.log('✨ Efectos únicos activados (versión mejorada)');
+    // ============================================================
+    // 6. EFECTO "CINTA MAGNÉTICA" EN SUBTÍTULOS (solo CSS)
+    // ============================================================
+    // Ya está en el CSS, no necesita JS
+
+    console.log('✨ Efectos únicos activados (versión estable)');
 });
