@@ -137,27 +137,80 @@ p {
    ============================================================ */
 .highlight-wrapper {
     display: inline-block;
-    min-height: 5.2rem;
-    max-height: 5.2rem;
+    min-height: 5.6rem;
+    max-height: 5.6rem;
     vertical-align: bottom;
     overflow: hidden;
     width: 100%;
-    max-width: 750px;
+    max-width: 780px;
 }
 
 .highlight-wrapper .highlight {
     display: block;
-    font-size: 1.3em !important;
+    font-size: 1.5em !important;
     /* Tamaño grande forzado */
     font-weight: 800;
     line-height: 1.2;
     word-break: break-word;
-    min-height: 5.2rem;
-    max-height: 5.2rem;
+    min-height: 5.6rem;
+    max-height: 5.6rem;
     overflow: hidden;
     letter-spacing: -0.02em;
 }
 
+/* Ajuste para tablets */
+@media (max-width: 1024px) {
+    .highlight-wrapper {
+        min-height: 4.8rem;
+        max-height: 4.8rem;
+        max-width: 580px;
+    }
+    .highlight-wrapper .highlight {
+        font-size: 1.3em !important;
+        min-height: 4.8rem;
+        max-height: 4.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .highlight-wrapper {
+        min-height: 4.4rem;
+        max-height: 4.4rem;
+        max-width: 480px;
+    }
+    .highlight-wrapper .highlight {
+        font-size: 1.1em !important;
+        min-height: 4.4rem;
+        max-height: 4.4rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .highlight-wrapper {
+        min-height: 3.8rem;
+        max-height: 3.8rem;
+        max-width: 360px;
+    }
+    .highlight-wrapper .highlight {
+        font-size: 0.95em !important;
+        min-height: 3.8rem;
+        max-height: 3.8rem;
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 400px) {
+    .highlight-wrapper {
+        min-height: 3.2rem;
+        max-height: 3.2rem;
+        max-width: 280px;
+    }
+    .highlight-wrapper .highlight {
+        font-size: 0.8em !important;
+        min-height: 3.2rem;
+        max-height: 3.2rem;
+    }
+}
 /* ============================================================
    WRAPPER PARA SUBTÍTULO - ALTURA FIJA
    ============================================================ */
