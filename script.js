@@ -1,5 +1,5 @@
 // ============================================================
-// SCRIPT COMPLETO - Luis Diosvan (VERSIÓN ESTABLE)
+// SCRIPT COMPLETO - Luis Diosvan
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================================
-    // 6. TEXTO DINÁMICO (con altura fija para 2 líneas)
+    // 6. TEXTO DINÁMICO (TAMAÑO GRANDE - SIN REDUCCIÓN)
     // ============================================================
     const dynamicText = document.getElementById('dynamic-text');
     if (dynamicText) {
@@ -124,21 +124,8 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
         let index = 0;
 
-        // Forzar que todas las frases tengan el mismo tamaño
-        const wrapper = document.getElementById('highlightWrapper');
-        if (wrapper) {
-            let maxLength = 0;
-            phrases.forEach(function(phrase) {
-                if (phrase.length > maxLength) maxLength = phrase.length;
-            });
-
-            const baseSize = window.innerWidth > 768 ? 1 : 0.85;
-            let fontSize = baseSize;
-            if (maxLength > 35) fontSize = baseSize * 0.85;
-            if (maxLength > 40) fontSize = baseSize * 0.75;
-
-            dynamicText.style.fontSize = fontSize + 'em';
-        }
+        // NO reducimos el tamaño de fuente automáticamente
+        // El CSS se encarga del tamaño
 
         setInterval(function() {
             index = (index + 1) % phrases.length;
