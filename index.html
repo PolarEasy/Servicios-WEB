@@ -51,24 +51,32 @@
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-text">
+
+                    <!-- BADGE (ESTÁTICO) -->
                     <div class="hero-badge">🚀 Desarrollo de software</div>
-                    
-                    <!-- ===== TÍTULO FIRME (SIN MORPHING) ===== -->
+
+                    <!-- ===== TÍTULO PRINCIPAL (ESTÁTICO - SIN EFECTO DE ESCRITURA) ===== -->
                     <h1 class="title-firme">
                         Convierte tus ideas en<br />
                         <span class="highlight" id="dynamic-text">herramientas que funcionan</span>
                     </h1>
-                    
-                    <!-- ===== SUBTÍTULO CON EFECTO MATRIX (sutil) ===== -->
-                    <p class="hero-sub matrix-text">
-                        No más procesos manuales, pérdidas de tiempo o software que no se adapta.
-                        Te creo soluciones a medida para que tu negocio <strong>avance más rápido</strong>.
-                    </p>
-                    
+
+                    <!-- ===== SUBTÍTULO CON ALTURA FIJA ===== -->
+                    <!-- El contenedor tiene una altura fija para que no se mueva -->
+                    <div class="hero-sub-wrapper">
+                        <p class="hero-sub" id="typing-text">
+                            No más procesos manuales, pérdidas de tiempo o software que no se adapta.
+                            Te creo soluciones a medida para que tu negocio <strong>avance más rápido</strong>.
+                        </p>
+                    </div>
+
+                    <!-- ===== BOTONES (ESTÁTICOS) ===== -->
                     <div class="hero-actions">
                         <a href="#que-hago" class="btn-primary">Ver cómo lo hago →</a>
                         <a href="#contacto" class="btn-secondary">Hablar directo</a>
                     </div>
+
+                    <!-- ===== ESTADÍSTICAS (ESTÁTICAS) ===== -->
                     <div class="hero-stats">
                         <div class="stat">
                             <span class="stat-number" data-count="30">0</span><span class="stat-number">+</span>
@@ -83,8 +91,10 @@
                             <span class="stat-label">Soporte incluido</span>
                         </div>
                     </div>
+
                 </div>
 
+                <!-- ===== COLUMNA DERECHA: AVATAR ===== -->
                 <div class="hero-visual">
                     <div class="avatar-frame">
                         <div class="aura-glow"></div>
@@ -97,6 +107,7 @@
                         <div class="wave-ring ring-3"></div>
                     </div>
                 </div>
+
             </div>
         </div>
     </header>
@@ -106,7 +117,6 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Lo que hago</span>
-                <!-- ===== TÍTULO FIRME (SIN RESPIRACIÓN) ===== -->
                 <h2 class="title-firme">Soluciones que <span class="highlight">mueven tu negocio</span></h2>
                 <p class="section-sub">
                     No vendo código, vendo <strong>problemas resueltos</strong>.
@@ -114,7 +124,6 @@
                 </p>
             </div>
 
-            <!-- ===== TARJETAS CON EFECTO HOLOGRAMA ===== -->
             <div class="services-grid">
                 <div class="service-card hologram-card">
                     <div class="service-icon">⚡</div>
@@ -143,12 +152,10 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Descargas gratuitas</span>
-                <!-- ===== TÍTULO FIRME ===== -->
                 <h2 class="title-firme">Herramientas que <span class="highlight">ya puedes usar</span></h2>
                 <p class="section-sub">Todas mis herramientas son 100% gratuitas. Descarga, ejecuta y ahorra tiempo.</p>
             </div>
-            
-            <!-- ===== TARJETAS POLAROID ===== -->
+
             <div class="tools-grid">
                 <div class="tool-card polaroid-card">
                     <div class="tool-icon">📂</div>
@@ -192,7 +199,6 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Lo que dicen</span>
-                <!-- ===== TÍTULO FIRME ===== -->
                 <h2 class="title-firme">Confianza que <span class="highlight">construye proyectos</span></h2>
             </div>
             <div class="testimonials-grid">
@@ -230,7 +236,6 @@
             <div class="contact-card">
                 <div class="contact-info">
                     <span class="section-tag">📬 Hablemos</span>
-                    <!-- ===== TÍTULO FIRME ===== -->
                     <h2 class="title-firme">¿Tienes una idea o un problema?</h2>
                     <p>Cuéntame lo que necesitas. Sin compromiso, solo una charla para explorar cómo puedo ayudarte.</p>
                     <div class="contact-links">
