@@ -1,9 +1,31 @@
 /* ================================================================
-   EFECTOS ÚNICOS - Luis Diosvan
+   EFECTOS ÚNICOS - Luis Diosvan (VERSIÓN MEJORADA)
    ================================================================ */
 
 /* ================================================================
-   1. DESTELLO AL CARGAR
+   1. TÍTULOS FIRMES (SIN MOVIMIENTO)
+   ================================================================ */
+.title-firme {
+    /* Eliminamos cualquier animación que distorsione */
+    animation: none !important;
+    transform: none !important;
+    letter-spacing: -0.02em !important;
+    font-weight: 800 !important;
+}
+
+.title-firme .highlight {
+    /* El highlight puede tener el shimmer suave */
+    animation: shimmerFirme 4s ease-in-out infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes shimmerFirme {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* ================================================================
+   2. DESTELLO AL CARGAR
    ================================================================ */
 .flash-intro {
     position: fixed;
@@ -27,7 +49,7 @@
 }
 
 /* ================================================================
-   2. FONDO CON ONDAS 3D
+   3. FONDO CON ONDAS 3D
    ================================================================ */
 .wave-background {
     position: fixed;
@@ -38,7 +60,7 @@
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
-    opacity: 0.15;
+    opacity: 0.12;
 }
 
 .wave {
@@ -48,13 +70,12 @@
     width: 200%;
     height: 200%;
     border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(124,107,255,0.3) 0%, transparent 60%);
     animation: waveMove 12s ease-in-out infinite;
 }
 
 .wave1 {
     animation-delay: 0s;
-    background: radial-gradient(ellipse, rgba(124,107,255,0.2) 0%, transparent 60%);
+    background: radial-gradient(ellipse, rgba(124,107,255,0.25) 0%, transparent 60%);
 }
 
 .wave2 {
@@ -78,7 +99,7 @@
 }
 
 /* ================================================================
-   3. EFECTO MATRIX EN EL TEXTO
+   4. EFECTO MATRIX EN SUBTÍTULOS (sutil)
    ================================================================ */
 .matrix-text {
     position: relative;
@@ -92,41 +113,14 @@
     left: 0;
     width: 100%;
     height: 200%;
-    background: linear-gradient(to bottom, transparent 0%, rgba(124,107,255,0.05) 50%, transparent 100%);
-    animation: matrixRain 3s linear infinite;
+    background: linear-gradient(to bottom, transparent 0%, rgba(124,107,255,0.04) 50%, transparent 100%);
+    animation: matrixRain 4s linear infinite;
     pointer-events: none;
 }
 
 @keyframes matrixRain {
     0% { transform: translateY(-100%); }
     100% { transform: translateY(100%); }
-}
-
-/* ================================================================
-   4. MORPHING EN EL TÍTULO
-   ================================================================ */
-.morphing-title {
-    animation: morphText 4s ease-in-out infinite;
-    display: inline-block;
-}
-
-@keyframes morphText {
-    0%, 100% {
-        transform: scale(1) rotate(0deg) skewX(0deg);
-        letter-spacing: -0.02em;
-    }
-    25% {
-        transform: scale(1.02) rotate(0.5deg) skewX(1deg);
-        letter-spacing: 0.02em;
-    }
-    50% {
-        transform: scale(0.98) rotate(-0.5deg) skewX(-1deg);
-        letter-spacing: 0.01em;
-    }
-    75% {
-        transform: scale(1.01) rotate(0.3deg) skewX(0.5deg);
-        letter-spacing: -0.01em;
-    }
 }
 
 /* ================================================================
@@ -152,7 +146,7 @@
         rgba(124,107,255,0.03) 50%,
         transparent 60%
     );
-    animation: hologramShine 3s ease-in-out infinite;
+    animation: hologramShine 3.5s ease-in-out infinite;
     pointer-events: none;
 }
 
@@ -162,7 +156,7 @@
 }
 
 /* ================================================================
-   6. EFECTO POLAROID EN TARJETAS
+   6. EFECTO POLAROID EN TARJETAS (mejorado)
    ================================================================ */
 .polaroid-card {
     transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1) !important;
@@ -170,7 +164,7 @@
 }
 
 .polaroid-card:hover {
-    transform: rotate(2deg) scale(1.02) translateY(-8px) !important;
+    transform: rotate(1.5deg) scale(1.02) translateY(-8px) !important;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3) !important;
 }
 
@@ -192,7 +186,7 @@
 }
 
 /* ================================================================
-   7. EFECTO LUPA EN IMÁGENES (AVATAR)
+   7. EFECTO LUPA EN AVATAR
    ================================================================ */
 .avatar-large {
     cursor: none;
@@ -200,8 +194,8 @@
 }
 
 .avatar-large:hover {
-    transform: scale(1.08) rotate(-2deg);
-    filter: brightness(1.1) saturate(1.1);
+    transform: scale(1.06) rotate(-2deg);
+    filter: brightness(1.08) saturate(1.08);
 }
 
 .avatar-large:active {
@@ -209,7 +203,7 @@
 }
 
 /* ================================================================
-   8. EFECTO TORNADO EN PARTÍCULAS (se activa con JS)
+   8. EFECTO TORNADO EN PARTÍCULAS
    ================================================================ */
 .particle-tornado .particle {
     animation: particleTornado 1.5s ease-in-out infinite !important;
@@ -221,25 +215,25 @@
         opacity: 0.6;
     }
     25% {
-        transform: translate(20px, -40px) rotate(90deg) scale(1.2);
+        transform: translate(15px, -30px) rotate(90deg) scale(1.2);
         opacity: 0.8;
     }
     50% {
-        transform: translate(-20px, -80px) rotate(180deg) scale(0.8);
+        transform: translate(-15px, -60px) rotate(180deg) scale(0.8);
         opacity: 0.4;
     }
     75% {
-        transform: translate(10px, -120px) rotate(270deg) scale(1.1);
+        transform: translate(8px, -90px) rotate(270deg) scale(1.1);
         opacity: 0.7;
     }
     100% {
-        transform: translate(0, -160px) rotate(360deg) scale(0.9);
+        transform: translate(0, -120px) rotate(360deg) scale(0.9);
         opacity: 0.2;
     }
 }
 
 /* ================================================================
-   9. EFECTO DE GRADIENTE EN MOVIMIENTO (fondo animado)
+   9. FONDO CON GRADIENTE ANIMADO
    ================================================================ */
 body::before {
     content: '';
@@ -250,14 +244,14 @@ body::before {
     height: 100%;
     background: linear-gradient(
         135deg,
-        rgba(124,107,255,0.02) 0%,
-        rgba(167,139,250,0.02) 25%,
-        rgba(106,89,232,0.02) 50%,
-        rgba(124,107,255,0.02) 75%,
-        rgba(167,139,250,0.02) 100%
+        rgba(124,107,255,0.015) 0%,
+        rgba(167,139,250,0.015) 25%,
+        rgba(106,89,232,0.015) 50%,
+        rgba(124,107,255,0.015) 75%,
+        rgba(167,139,250,0.015) 100%
     );
     background-size: 400% 400%;
-    animation: gradientMove 15s ease-in-out infinite;
+    animation: gradientMove 20s ease-in-out infinite;
     z-index: 0;
     pointer-events: none;
 }
@@ -271,7 +265,7 @@ body::before {
 }
 
 /* ================================================================
-   10. EFECTO DE "RESPLANDOR" EN BOTONES
+   10. BOTONES CON RESPLANDOR
    ================================================================ */
 .btn-primary {
     position: relative;
@@ -285,18 +279,18 @@ body::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
-    animation: buttonGlow 3s ease-in-out infinite;
+    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 60%);
+    animation: buttonGlow 4s ease-in-out infinite;
     pointer-events: none;
 }
 
 @keyframes buttonGlow {
-    0%, 100% { transform: scale(0.8) rotate(0deg); opacity: 0.3; }
-    50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+    0%, 100% { transform: scale(0.8) rotate(0deg); opacity: 0.2; }
+    50% { transform: scale(1.2) rotate(180deg); opacity: 0.7; }
 }
 
 /* ================================================================
-   11. EFECTO DE "CAMBIO DE COLOR" EN EL LOGO
+   11. LOGO CON GRADIENTE ANIMADO
    ================================================================ */
 .logo {
     background: linear-gradient(135deg, #7c6bff, #a78bfa, #7c6bff);
@@ -304,7 +298,7 @@ body::before {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: logoShimmer 4s ease-in-out infinite;
+    animation: logoShimmer 5s ease-in-out infinite;
 }
 
 @keyframes logoShimmer {
@@ -314,7 +308,7 @@ body::before {
 }
 
 /* ================================================================
-   12. EFECTO DE "PARPADEO" EN BADGES (mejorado)
+   12. BADGES MEJORADOS
    ================================================================ */
 .floating-badge {
     animation: floatBadgeGlow 2.5s ease-in-out infinite !important;
@@ -323,61 +317,85 @@ body::before {
 @keyframes floatBadgeGlow {
     0%, 100% {
         transform: translateY(0) scale(1);
-        box-shadow: 0 0 10px rgba(124,107,255,0.1);
+        box-shadow: 0 0 10px rgba(124,107,255,0.05);
     }
     50% {
-        transform: translateY(-12px) scale(1.05);
-        box-shadow: 0 0 30px rgba(124,107,255,0.2);
+        transform: translateY(-10px) scale(1.04);
+        box-shadow: 0 0 30px rgba(124,107,255,0.15);
     }
 }
 
 /* ================================================================
-   13. EFECTO DE "DESTELLO" EN TARJETAS AL HOVER
+   13. EFECTO "VIDRIO" EN TARJETAS (NUEVO)
    ================================================================ */
 .service-card, .tool-card, .testimonial-card {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
 }
 
 .service-card:hover, .tool-card:hover, .testimonial-card:hover {
     transform: translateY(-8px) scale(1.01);
-    box-shadow: 0 20px 60px rgba(124,107,255,0.08);
+    box-shadow: 0 20px 60px rgba(124,107,255,0.06);
 }
 
 /* ================================================================
-   14. EFECTO DE "TEXTO QUE RESPIRA"
+   14. EFECTO "NEÓN" EN EL BORDE DE TARJETAS (NUEVO)
    ================================================================ */
-.section-header h2 {
-    animation: textBreathe 3s ease-in-out infinite;
+.service-card, .tool-card, .testimonial-card {
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.04);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-@keyframes textBreathe {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.02); opacity: 0.95; }
+.service-card:hover, .tool-card:hover, .testimonial-card:hover {
+    border-color: rgba(124,107,255,0.2);
+    box-shadow: 0 0 30px rgba(124,107,255,0.02);
 }
 
 /* ================================================================
-   15. EFECTO DE "CARGANDO" EN BOTONES (hover)
+   15. EFECTO "CINTA MAGNÉTICA" EN EL TEXTO (NUEVO - sutil)
    ================================================================ */
-.btn-primary:hover {
-    animation: buttonPulse 1s ease-in-out infinite;
+.hero-sub, .section-sub {
+    position: relative;
+    display: inline-block;
 }
 
-@keyframes buttonPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.03); }
+.hero-sub::after, .section-sub::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background: linear-gradient(to right, rgba(124,107,255,0.3), transparent);
+    animation: magneticTape 6s ease-in-out infinite;
+}
+
+@keyframes magneticTape {
+    0%, 100% { width: 0%; left: 0; }
+    25% { width: 30%; left: 0; }
+    50% { width: 0%; left: 50%; }
+    75% { width: 30%; left: 70%; }
 }
 
 /* ================================================================
-   RESPONSIVE
+   16. RESPONSIVE
    ================================================================ */
 @media (max-width: 600px) {
     .wave-background {
-        opacity: 0.05;
+        opacity: 0.04;
     }
-    .morphing-title {
-        animation: none;
+    .matrix-text::before {
+        animation-duration: 6s;
     }
     .hologram-card::before {
         animation-duration: 5s;
+    }
+    .floating-badge {
+        animation-duration: 3s !important;
+    }
+    .hero-sub::after, .section-sub::after {
+        animation-duration: 8s;
     }
 }
