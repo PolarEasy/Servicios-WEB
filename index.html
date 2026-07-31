@@ -6,25 +6,25 @@
     <title>Luis Diosvan · Software que funciona</title>
     <meta name="description" content="Desarrollo de software a medida. Automatización, herramientas y páginas web para negocios que quieren crecer." />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="efectos.css" />  <!-- ← NUEVO: efectos únicos -->
+    <link rel="stylesheet" href="efectos.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-    <!-- ===== EFECTO 1: DESTELLO AL CARGAR ===== -->
+    <!-- ===== DESTELLO AL CARGAR ===== -->
     <div class="flash-intro" id="flashIntro"></div>
 
-    <!-- ===== EFECTO 2: FONDO CON ONDAS 3D ===== -->
+    <!-- ===== FONDO CON ONDAS 3D ===== -->
     <div class="wave-background">
         <div class="wave wave1"></div>
         <div class="wave wave2"></div>
         <div class="wave wave3"></div>
     </div>
 
-    <!-- ===== EFECTO 3: PARTICULAS ===== -->
+    <!-- ===== PARTÍCULAS ===== -->
     <div id="particles-container"></div>
 
-    <!-- ===== EFECTO 4: SELECTOR DE TEMAS ===== -->
+    <!-- ===== SELECTOR DE TEMAS ===== -->
     <div class="theme-selector">
         <button class="theme-btn" data-theme="dark" title="Modo Oscuro">🌙</button>
         <button class="theme-btn" data-theme="light" title="Modo Claro">☀️</button>
@@ -53,17 +53,18 @@
                 <div class="hero-text">
                     <div class="hero-badge">🚀 Desarrollo de software</div>
                     
-                    <!-- ===== EFECTO 5: TÍTULO CON MORPHING ===== -->
-                    <h1 class="morphing-title">
+                    <!-- ===== TÍTULO FIRME (SIN MORPHING) ===== -->
+                    <h1 class="title-firme">
                         Convierte tus ideas en<br />
                         <span class="highlight" id="dynamic-text">herramientas que funcionan</span>
                     </h1>
                     
-                    <!-- ===== EFECTO 6: TEXTO CON EFECTO MATRIX ===== -->
+                    <!-- ===== SUBTÍTULO CON EFECTO MATRIX (sutil) ===== -->
                     <p class="hero-sub matrix-text">
                         No más procesos manuales, pérdidas de tiempo o software que no se adapta.
                         Te creo soluciones a medida para que tu negocio <strong>avance más rápido</strong>.
                     </p>
+                    
                     <div class="hero-actions">
                         <a href="#que-hago" class="btn-primary">Ver cómo lo hago →</a>
                         <a href="#contacto" class="btn-secondary">Hablar directo</a>
@@ -105,14 +106,15 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Lo que hago</span>
-                <h2>Soluciones que <span class="highlight">mueven tu negocio</span></h2>
+                <!-- ===== TÍTULO FIRME (SIN RESPIRACIÓN) ===== -->
+                <h2 class="title-firme">Soluciones que <span class="highlight">mueven tu negocio</span></h2>
                 <p class="section-sub">
                     No vendo código, vendo <strong>problemas resueltos</strong>.
                     Cada herramienta está pensada para que tú ahorres tiempo, dinero y dolores de cabeza.
                 </p>
             </div>
 
-            <!-- ===== EFECTO 7: TARJETAS CON EFECTO HOLOGRAMA ===== -->
+            <!-- ===== TARJETAS CON EFECTO HOLOGRAMA ===== -->
             <div class="services-grid">
                 <div class="service-card hologram-card">
                     <div class="service-icon">⚡</div>
@@ -141,11 +143,12 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Descargas gratuitas</span>
-                <h2>Herramientas que <span class="highlight">ya puedes usar</span></h2>
+                <!-- ===== TÍTULO FIRME ===== -->
+                <h2 class="title-firme">Herramientas que <span class="highlight">ya puedes usar</span></h2>
                 <p class="section-sub">Todas mis herramientas son 100% gratuitas. Descarga, ejecuta y ahorra tiempo.</p>
             </div>
             
-            <!-- ===== EFECTO 8: TARJETAS POLAROID ===== -->
+            <!-- ===== TARJETAS POLAROID ===== -->
             <div class="tools-grid">
                 <div class="tool-card polaroid-card">
                     <div class="tool-icon">📂</div>
@@ -189,7 +192,8 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Lo que dicen</span>
-                <h2>Confianza que <span class="highlight">construye proyectos</span></h2>
+                <!-- ===== TÍTULO FIRME ===== -->
+                <h2 class="title-firme">Confianza que <span class="highlight">construye proyectos</span></h2>
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
@@ -226,7 +230,8 @@
             <div class="contact-card">
                 <div class="contact-info">
                     <span class="section-tag">📬 Hablemos</span>
-                    <h2>¿Tienes una idea o un problema?</h2>
+                    <!-- ===== TÍTULO FIRME ===== -->
+                    <h2 class="title-firme">¿Tienes una idea o un problema?</h2>
                     <p>Cuéntame lo que necesitas. Sin compromiso, solo una charla para explorar cómo puedo ayudarte.</p>
                     <div class="contact-links">
                         <a href="mailto:Luiseverth@gmail.com" class="contact-link">📧 Luiseverth@gmail.com</a>
@@ -263,6 +268,6 @@
     </footer>
 
     <script src="script.js"></script>
-    <script src="efectos.js"></script>  <!-- ← NUEVO: efectos únicos -->
+    <script src="efectos.js"></script>
 </body>
 </html>
