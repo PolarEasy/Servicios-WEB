@@ -401,5 +401,32 @@
 
     <script src="script.js"></script>
     <script src="efectos.js"></script>
+        <!-- ===== ACCESO ADMIN OCULTO (Doble clic en el logo) ===== -->
+    <script>
+        (function() {
+            let clickCount = 0;
+            let clickTimer = null;
+            const logo = document.querySelector('.logo');
+    
+            if (logo) {
+                logo.style.cursor = 'default';
+                logo.addEventListener('click', function(e) {
+                    clickCount++;
+    
+                    if (clickCount === 1) {
+                        clickTimer = setTimeout(function() {
+                            clickCount = 0;
+                        }, 600);
+                    }
+    
+                    if (clickCount === 3) {
+                        clearTimeout(clickTimer);
+                        clickCount = 0;
+                        window.location.href = 'admin.html';
+                    }
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
