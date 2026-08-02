@@ -207,8 +207,9 @@ function showCodeModal() {
     document.body.appendChild(modal);
 
     // Enfocar el input
-    setTimeout(() => {
-        document.getElementById('codeInput').focus();
+    setTimeout(function() {
+        const input = document.getElementById('codeInput');
+        if (input) input.focus();
     }, 200);
 
     // Eventos
@@ -242,7 +243,8 @@ function showCodeModal() {
     // Cerrar con Escape
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            modal.remove();
+            const m = document.getElementById('codeModal');
+            if (m) m.remove();
         }
     });
 
@@ -255,10 +257,16 @@ function showCodeModal() {
 }
 
 // ============================================================
-// FUNCIÓN PARA CAMBIAR EL CÓDIGO DESDE EL PANEL
+// MODAL PARA CAMBIAR CÓDIGO (DESDE EL PANEL)
 // ============================================================
 
 function showChangeCodeModal() {
+    // Eliminar modal existente
+    const existingModal = document.getElementById('changeCodeModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
     const overlay = document.createElement('div');
     overlay.id = 'changeCodeModal';
     overlay.style.cssText = `
@@ -351,6 +359,13 @@ function showChangeCodeModal() {
 
     document.body.appendChild(overlay);
 
+    // Enfocar el input
+    setTimeout(function() {
+        const input = document.getElementById('oldCodeInput');
+        if (input) input.focus();
+    }, 200);
+
+    // Eventos
     document.getElementById('changeCodeForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const oldCode = document.getElementById('oldCodeInput').value.trim();
@@ -384,13 +399,22 @@ function showChangeCodeModal() {
             overlay.remove();
         }
     });
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const m = document.getElementById('changeCodeModal');
+            if (m) m.remove();
+        }
+    });
 }
 
 // ============================================================
 // TOAST NOTIFICATIONS
 // ============================================================
 
-function showToast(message, duration = 3000) {
+function showToast(message, duration) {
+    duration = duration || 3000;
     const existing = document.querySelector('.toast');
     if (existing) {
         existing.remove();
@@ -443,39 +467,6 @@ function showToast(message, duration = 3000) {
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar acceso oculto (5 clics)
     initHiddenAccess();
-
-    // Si estamos en admin-panel.html, mostrar opción para cambiar código
-    if (window.location.pathname.includes('admin-panel.html')) {
-        const adminGrid = document.querySelector('.admin-grid');
-        if (adminGrid) {
-            // Buscar la tarjeta de reset y agregar una de cambio de código
-            const cards = adminGrid.querySelectorAll('.admin-card');
-            let resetCard = null;
-            cards.forEach(function(card) {
-                if (card.dataset.section === 'reset') {
-                    resetCard = card;
-                }
-            });
-
-            if (resetCard) {
-                // Insertar antes de reset
-                const codeCard = document.createElement('div');
-                codeCard.className = 'admin-card';
-                codeCard.dataset.section = 'change-code';
-                codeCard.style.cssText = 'border-color:rgba(124,107,255,0.15);';
-                codeCard.innerHTML = `
-                    <div class="card-icon">🔑</div>
-                    <h3>Cambiar código de acceso</h3>
-                    <p>Modifica el código de 5 clics. Necesitas el código actual.</p>
-                    <span class="card-status">✓ Seguro</span>
-                `;
-                codeCard.addEventListener('click', function() {
-                    showChangeCodeModal();
-                });
-                resetCard.parentNode.insertBefore(codeCard, resetCard);
-            }
-        }
-    }
 
     // Login
     const loginForm = document.getElementById('loginForm');
