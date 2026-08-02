@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel Admin · Luis Diosvan</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="admin.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <style>
+        /* Estilos del panel */
+        .admin-panel {
+            padding: 40px 0 60px;
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .admin-header h1 {
+            font-size: 1.8rem;
+        }
+
+        .admin-header .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #808090;
+        }
+
+        .admin-header .admin-user span {
+            color: #fff;
+        }
+
+        .btn-logout {
+            background: rgba(255, 70, 70, 0.1);
+            color: #ff6b6b;
+            padding: 8px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 70, 70, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-logout:hover {
+            background: rgba(255, 70, 70, 0.2);
+            border-color: rgba(255, 70, 70, 0.3);
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .admin-card {
+            background: rgba(20, 20, 35, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 28px 24px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .admin-card:hover {
+            border-color: rgba(124, 107, 255, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .admin-card .card-icon {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+        }
+
+        .admin-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        .admin-card p {
+            color: #808090;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .admin-card .card-status {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 0.75rem;
+            color: #4caf50;
+            background: rgba(76, 175, 80, 0.1);
+            padding: 2px 14px;
+            border-radius: 30px;
+        }
+
+        .admin-card .card-status.inactive {
+            color: #ff6b6b;
+            background: rgba(255, 70, 70, 0.1);
+        }
+
+        /* Editor inline (modal) */
+        .editor-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .editor-overlay.active {
+            display: flex;
+        }
+
+        .editor-modal {
+            background: #14141f;
+            border-radius: 28px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .editor-modal h2 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .editor-modal p {
+            color: #808090;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .editor-modal label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #b0b0c0;
+            margin-bottom: 6px;
+        }
+
+        .editor-modal input,
+        .editor-modal textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s;
+            margin-bottom: 16px;
+        }
+
+        .editor-modal textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .editor-modal input:focus,
+        .editor-modal textarea:focus {
+            outline: none;
+            border-color: #7c6bff;
+        }
+
+        .editor-modal .btn-row {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .editor-modal .btn-secondary {
+            background: rgba(255, 255, 255, 0.04);
+            color: #a0a0b0;
+            padding: 12px 28px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .editor-modal .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .editor-modal .btn-primary {
+            padding: 12px 32px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(20, 20, 35, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 16px 28px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #fff;
+            font-size: 0.95rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: 99999;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-container"></div>
+
+    <div class="container admin-panel">
+        <!-- Header -->
+        <div class="admin-header">
+            <div>
+                <h1>⚙️ Panel de Administración</h1>
+                <p style="color:#808090;font-size:0.9rem;">Gestiona el contenido de tu sitio web</p>
+            </div>
+            <div class="admin-user">
+                <span>👤 <span id="adminName">Administrador</span></span>
+                <button class="btn-logout" id="logoutBtn">Cerrar sesión</button>
+            </div>
+        </div>
+
+        <!-- Grid de opciones -->
+        <div class="admin-grid">
+            <!-- Tarjeta 1: Editar Título Hero -->
+            <div class="admin-card" data-section="hero-title">
+                <div class="card-icon">📝</div>
+                <h3>Editar Título Principal</h3>
+                <p>Cambia el texto principal del Hero: "Convierte tus ideas en..."</p>
+                <span class="card-status">✓ Editable</span>
+            </div>
+
+            <!-- Tarjeta 2: Editar Subtítulo -->
+            <div class="admin-card" data-section="hero-sub">
+                <div class="card-icon">✍️</div>
+                <h3>Editar Subtítulo</h3>
+                <p>Cambia el texto que aparece debajo del título principal</p>
+                <span class="card-status">✓ Editable</span>
+            </div>
+
+            <!-- Tarjeta 3: Editar Servicios -->
+            <div class="admin-card" data-section="services">
+                <div class="card-icon">🛠️</div>
+                <h3>Editar Servicios</h3>
+                <p>Modifica los servicios que ofreces en la sección "Qué hago"</p>
+                <span class="card-status">✓ Editable</span>
+            </div>
+
+            <!-- Tarjeta 4: Editar Herramientas -->
+            <div class="admin-card" data-section="tools">
+                <div class="card-icon">📦</div>
+                <h3>Editar Herramientas</h3>
+                <p>Actualiza la lista de herramientas disponibles para descarga</p>
+                <span class="card-status">✓ Editable</span>
+            </div>
+
+            <!-- Tarjeta 5: Editar Testimonios -->
+            <div class="admin-card" data-section="testimonials">
+                <div class="card-icon">⭐</div>
+                <h3>Editar Testimonios</h3>
+                <p>Agrega o modifica los testimonios de tus clientes</p>
+                <span class="card-status">✓ Editable</span>
+            </div>
+
+            <!-- Tarjeta 6: Editar Contacto -->
+            <div class="admin-card" data-section="contact">
+                <div class="card-icon">📬</div>
+                <h3>Editar Contacto</h3>
+                <p>Actualiza tu correo, WhatsApp y otros datos de contacto</p>
+                <span class="card-status">✓ Editable</span>
+            </div>
+
+            <!-- Tarjeta 7: Diseños Web -->
+            <div class="admin-card" data-section="designs">
+                <div class="card-icon">🎨</div>
+                <h3>Editar Diseños Web</h3>
+                <p>Modifica los diseños de páginas web que ofreces</p>
+                <span class="card-status">✓ Editable</span>
+            </div>
+
+            <!-- Tarjeta 8: Reset -->
+            <div class="admin-card" data-section="reset" style="border-color:rgba(255,70,70,0.1);">
+                <div class="card-icon">🔄</div>
+                <h3>Restaurar contenido</h3>
+                <p>Vuelve al contenido original por defecto</p>
+                <span class="card-status inactive">⚠️ Cuidado</span>
+            </div>
+        </div>
+
+        <div style="margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.04);">
+            <p style="color:#606070;font-size:0.85rem;text-align:center;">
+                🔒 Los cambios se guardan automáticamente en tu navegador.<br>
+                Para compartir los cambios, exporta el contenido o actualiza los archivos HTML.
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== EDITOR MODAL ===== -->
+    <div class="editor-overlay" id="editorOverlay">
+        <div class="editor-modal">
+            <h2 id="editorTitle">Editar contenido</h2>
+            <p id="editorDesc">Modifica el texto y guarda los cambios</p>
+            <form id="editorForm">
+                <div id="editorFields"></div>
+                <div class="btn-row">
+                    <button type="button" class="btn-secondary" id="editorCancel">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script src="admin.js"></script>
+    <script>
+        // Verificar autenticación al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            const isAdmin = localStorage.getItem('adminAuthenticated') === 'true';
+            if (!isAdmin) {
+                window.location.href = 'admin.html';
+            }
+
+            // Mostrar nombre del admin
+            const adminName = localStorage.getItem('adminName') || 'Administrador';
+            const nameEl = document.getElementById('adminName');
+            if (nameEl) nameEl.textContent = adminName;
+
+            // Cargar datos guardados
+            loadSavedContent();
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('adminAuthenticated');
+            localStorage.removeItem('adminName');
+            window.location.href = 'admin.html';
+        });
+
+        // ===== FUNCIONES DEL PANEL =====
+        function loadSavedContent() {
+            // Cargar los datos guardados o usar los valores por defecto
+            const savedData = localStorage.getItem('siteContent');
+            if (savedData) {
+                console.log('✅ Contenido cargado desde localStorage');
+                applyContent(JSON.parse(savedData));
+            } else {
+                console.log('ℹ️ Usando contenido por defecto');
+            }
+        }
+
+        function applyContent(data) {
+            // Aquí se aplicarán los cambios al DOM cuando se edite algo
+            console.log('📝 Aplicando contenido:', data);
+        }
+
+        function showToast(message, duration = 3000) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
+        }
+
+        // ===== ABRIR EDITOR =====
+        document.querySelectorAll('.admin-card[data-section]').forEach(function(card) {
+            card.addEventListener('click', function() {
+                const section = this.dataset.section;
+                if (section === 'reset') {
+                    if (confirm('⚠️ ¿Estás seguro de que quieres restaurar el contenido original? Esto eliminará todos los cambios guardados.')) {
+                        localStorage.removeItem('siteContent');
+                        showToast('🔄 Contenido restaurado a valores por defecto', 3000);
+                        location.reload();
+                    }
+                    return;
+                }
+                openEditor(section);
+            });
+        });
+
+        function openEditor(section) {
+            const overlay = document.getElementById('editorOverlay');
+            const title = document.getElementById('editorTitle');
+            const desc = document.getElementById('editorDesc');
+            const fields = document.getElementById('editorFields');
+
+            const content = getSectionContent(section);
+
+            title.textContent = content.title;
+            desc.textContent = content.desc;
+
+            fields.innerHTML = '';
+
+            content.fields.forEach(function(field) {
+                const label = document.createElement('label');
+                label.textContent = field.label;
+                fields.appendChild(label);
+
+                if (field.type === 'textarea') {
+                    const textarea = document.createElement('textarea');
+                    textarea.id = 'field_' + field.key;
+                    textarea.value = field.value || '';
+                    fields.appendChild(textarea);
+                } else {
+                    const input = document.createElement('input');
+                    input.type = field.type || 'text';
+                    input.id = 'field_' + field.key;
+                    input.value = field.value || '';
+                    fields.appendChild(input);
+                }
+            });
+
+            overlay.classList.add('active');
+
+            // Guardar referencia de la sección
+            overlay.dataset.section = section;
+        }
+
+        // ===== CERRAR EDITOR =====
+        document.getElementById('editorCancel').addEventListener('click', function() {
+            document.getElementById('editorOverlay').classList.remove('active');
+        });
+
+        document.getElementById('editorOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+            }
+        });
+
+        // ===== GUARDAR EDITOR =====
+        document.getElementById('editorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const overlay = document.getElementById('editorOverlay');
+            const section = overlay.dataset.section;
+            const fields = overlay.querySelectorAll('input, textarea');
+
+            const data = {};
+            fields.forEach(function(field) {
+                const key = field.id.replace('field_', '');
+                data[key] = field.value;
+            });
+
+            saveSection(section, data);
+            overlay.classList.remove('active');
+            showToast('✅ Cambios guardados correctamente', 2500);
+        });
+
+        function saveSection(section, data) {
+            let saved = JSON.parse(localStorage.getItem('siteContent') || '{}');
+            saved[section] = data;
+            localStorage.setItem('siteContent', JSON.stringify(saved));
+            console.log('💾 Guardado:', section, data);
+        }
+
+        function getSectionContent(section) {
+            const content = {
+                'hero-title': {
+                    title: 'Editar Título Principal',
+                    desc: 'Cambia el texto que aparece en el Hero de la página.',
+                    fields: [
+                        { key: 'title', label: 'Título (primera línea)', type: 'text', value: 'Convierte tus ideas en' },
+                        { key: 'dynamic', label: 'Texto dinámico (frases que cambian)', type: 'text', value: 'herramientas que funcionan' }
+                    ]
+                },
+                'hero-sub': {
+                    title: 'Editar Subtítulo',
+                    desc: 'Cambia el texto debajo del título principal.',
+                    fields: [
+                        { key: 'subtitle', label: 'Subtítulo', type: 'textarea', value: 'No más procesos manuales, pérdidas de tiempo o software que no se adapta. Te creo soluciones a medida para que tu negocio avance más rápido.' }
+                    ]
+                },
+                'services': {
+                    title: 'Editar Servicios',
+                    desc: 'Modifica los servicios que ofreces.',
+                    fields: [
+                        { key: 'service1', label: 'Servicio 1', type: 'text', value: 'Automatización inteligente' },
+                        { key: 'service1_desc', label: 'Descripción Servicio 1', type: 'textarea', value: 'Esa tarea repetitiva que odias hacer cada día... yo la convierto en un script que corre solo.' },
+                        { key: 'service2', label: 'Servicio 2', type: 'text', value: 'Páginas web que venden' },
+                        { key: 'service2_desc', label: 'Descripción Servicio 2', type: 'textarea', value: 'Tu negocio necesita presencia digital. Te hago una web rápida, bonita y optimizada.' },
+                        { key: 'service3', label: 'Servicio 3', type: 'text', value: 'Herramientas a medida' },
+                        { key: 'service3_desc', label: 'Descripción Servicio 3', type: 'textarea', value: '¿Ningún software hace lo que necesitas? Te creo la solución exacta desde cero.' }
+                    ]
+                },
+                'tools': {
+                    title: 'Editar Herramientas',
+                    desc: 'Actualiza la lista de herramientas disponibles.',
+                    fields: [
+                        { key: 'tool1', label: 'Herramienta 1', type: 'text', value: 'Organizador de Archivos' },
+                        { key: 'tool1_desc', label: 'Descripción Herramienta 1', type: 'text', value: 'Ordena tus descargas en segundos.' },
+                        { key: 'tool2', label: 'Herramienta 2', type: 'text', value: 'Generador de Reportes' },
+                        { key: 'tool2_desc', label: 'Descripción Herramienta 2', type: 'text', value: 'Convierte Excel a PDF con un clic.' },
+                        { key: 'tool3', label: 'Herramienta 3', type: 'text', value: 'Limpiador de Temporales' },
+                        { key: 'tool3_desc', label: 'Descripción Herramienta 3', type: 'text', value: 'Libera espacio en tu PC.' }
+                    ]
+                },
+                'testimonials': {
+                    title: 'Editar Testimonios',
+                    desc: 'Modifica los testimonios de tus clientes.',
+                    fields: [
+                        { key: 'testimonial1', label: 'Testimonio 1', type: 'textarea', value: '"Luis me creó un script que me ahorra 10 horas a la semana. Increíblemente simple y efectivo."' },
+                        { key: 'testimonial1_author', label: 'Autor 1', type: 'text', value: 'Carlos M. - Dueño de tienda online' },
+                        { key: 'testimonial2', label: 'Testimonio 2', type: 'textarea', value: '"Mi página web pasó de ser un adorno a una máquina de ventas."' },
+                        { key: 'testimonial2_author', label: 'Autor 2', type: 'text', value: 'Valentina R. - Emprendedora digital' },
+                        { key: 'testimonial3', label: 'Testimonio 3', type: 'textarea', value: '"El generador de reportes me salvó la vida. PDFs perfectos en segundos."' },
+                        { key: 'testimonial3_author', label: 'Autor 3', type: 'text', value: 'Andrés P. - Gerente de operaciones' }
+                    ]
+                },
+                'contact': {
+                    title: 'Editar Contacto',
+                    desc: 'Actualiza tus datos de contacto.',
+                    fields: [
+                        { key: 'email', label: 'Correo electrónico', type: 'email', value: 'Luiseverth@gmail.com' },
+                        { key: 'whatsapp', label: 'WhatsApp (con código de país)', type: 'text', value: '573123456789' },
+                        { key: 'github', label: 'Usuario de GitHub', type: 'text', value: 'PolarEasy' }
+                    ]
+                },
+                'designs': {
+                    title: 'Editar Diseños Web',
+                    desc: 'Modifica los diseños de páginas web que ofreces.',
+                    fields: [
+                        { key: 'design1', label: 'Diseño 1', type: 'text', value: 'Landing Page Profesional' },
+                        { key: 'design1_desc', label: 'Descripción Diseño 1', type: 'text', value: 'Página de presentación perfecta para captar leads.' },
+                        { key: 'design2', label: 'Diseño 2', type: 'text', value: 'Tienda Online / E-commerce' },
+                        { key: 'design2_desc', label: 'Descripción Diseño 2', type: 'text', value: 'Vende tus productos en línea con una tienda atractiva.' },
+                        { key: 'design3', label: 'Diseño 3', type: 'text', value: 'Blog / Magazine Digital' },
+                        { key: 'design3_desc', label: 'Descripción Diseño 3', type: 'text', value: 'Comparte contenido y construye autoridad.' }
+                    ]
+                }
+            };
+
+            // Cargar datos guardados si existen
+            const saved = JSON.parse(localStorage.getItem('siteContent') || '{}');
+            if (saved[section]) {
+                content[section].fields.forEach(function(field) {
+                    if (saved[section][field.key] !== undefined) {
+                        field.value = saved[section][field.key];
+                    }
+                });
+            }
+
+            return content[section] || { title: 'Editar', desc: '', fields: [] };
+        }
+    </script>
+</body>
+</html>
