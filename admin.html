@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acceso Admin · Luis Diosvan</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="admin.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <style>
+        /* Estilos específicos para la página de login */
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0f;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-page::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 107, 255, 0.05) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .login-box {
+            background: rgba(20, 20, 35, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 48px 40px;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-box .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 8px;
+            display: block;
+            background: linear-gradient(135deg, #7c6bff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .login-box .subtitle {
+            text-align: center;
+            color: #808090;
+            font-size: 0.9rem;
+            margin-bottom: 32px;
+        }
+
+        .login-box label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #b0b0c0;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .login-box input:focus {
+            outline: none;
+            border-color: #7c6bff;
+            box-shadow: 0 0 20px rgba(124, 107, 255, 0.08);
+        }
+
+        .login-box input::placeholder {
+            color: #505060;
+        }
+
+        .login-box .btn-primary {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .login-error {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .login-error.show {
+            display: block;
+        }
+
+        .login-box .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+            color: #606070;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .login-box .back-link:hover {
+            color: #a0a0b0;
+        }
+
+        .login-box .hint {
+            text-align: center;
+            color: #404050;
+            font-size: 0.7rem;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 16px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-page">
+        <!-- Fondo con partículas sutiles -->
+        <div id="particles-container"></div>
+
+        <div class="login-box">
+            <span class="logo">✦ LD</span>
+            <p class="subtitle">Acceso restringido</p>
+
+            <form id="loginForm">
+                <label for="adminUser">Usuario</label>
+                <input type="text" id="adminUser" placeholder="Ingresa tu usuario" autocomplete="username" />
+
+                <label for="adminPass">Contraseña</label>
+                <input type="password" id="adminPass" placeholder="Ingresa tu contraseña" autocomplete="current-password" />
+
+                <button type="submit" class="btn-primary">Acceder →</button>
+
+                <div class="login-error" id="loginError">
+                    ⚠️ Usuario o contraseña incorrectos
+                </div>
+            </form>
+
+            <a href="index.html" class="back-link">← Volver al sitio</a>
+            <p class="hint">✦ Acceso exclusivo para administradores</p>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <script>
+        // Partículas sutiles para la página de login
+        (function() {
+            const container = document.getElementById('particles-container');
+            if (!container) return;
+            const colors = ['#7c6bff', '#a78bfa', '#6a59e8'];
+            for (let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                const size = Math.random() * 2 + 1;
+                p.style.width = size + 'px';
+                p.style.height = size + 'px';
+                p.style.background = colors[Math.floor(Math.random() * colors.length)];
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                p.style.animationDelay = (Math.random() * 10) + 's';
+                container.appendChild(p);
+            }
+        })();
+    </script>
+</body>
+</html>
