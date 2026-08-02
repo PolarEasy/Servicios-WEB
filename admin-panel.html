@@ -110,7 +110,7 @@
             background: rgba(255, 70, 70, 0.1);
         }
 
-        /* Editor inline (modal) */
+        /* Editor modal */
         .editor-overlay {
             position: fixed;
             top: 0;
@@ -233,6 +233,20 @@
             transform: translateY(0);
             opacity: 1;
         }
+
+        @media (max-width: 600px) {
+            .admin-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .admin-header .admin-user {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -309,7 +323,8 @@
                 <p>Modifica los diseños de páginas web que ofreces</p>
                 <span class="card-status">✓ Editable</span>
             </div>
-                        <!-- Tarjeta: Cambiar código de acceso -->
+
+            <!-- Tarjeta 8: Cambiar código de acceso -->
             <div class="admin-card" data-section="change-code" style="border-color:rgba(124,107,255,0.15);">
                 <div class="card-icon">🔑</div>
                 <h3>Cambiar código de acceso</h3>
@@ -317,7 +332,7 @@
                 <span class="card-status">✓ Seguro</span>
             </div>
 
-            <!-- Tarjeta 8: Reset -->
+            <!-- Tarjeta 9: Reset -->
             <div class="admin-card" data-section="reset" style="border-color:rgba(255,70,70,0.1);">
                 <div class="card-icon">🔄</div>
                 <h3>Restaurar contenido</h3>
@@ -354,6 +369,10 @@
 
     <script src="admin.js"></script>
     <script>
+        // ============================================================
+        // SCRIPT DEL PANEL
+        // ============================================================
+
         // Verificar autenticación al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
             const isAdmin = localStorage.getItem('adminAuthenticated') === 'true';
@@ -379,7 +398,6 @@
 
         // ===== FUNCIONES DEL PANEL =====
         function loadSavedContent() {
-            // Cargar los datos guardados o usar los valores por defecto
             const savedData = localStorage.getItem('siteContent');
             if (savedData) {
                 console.log('✅ Contenido cargado desde localStorage');
@@ -390,16 +408,16 @@
         }
 
         function applyContent(data) {
-            // Aquí se aplicarán los cambios al DOM cuando se edite algo
             console.log('📝 Aplicando contenido:', data);
         }
 
-        function showToast(message, duration = 3000) {
+        function showToast(message, duration) {
+            duration = duration || 3000;
             const toast = document.getElementById('toast');
             toast.textContent = message;
             toast.classList.add('show');
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
+            toast._timeout = setTimeout(function() {
                 toast.classList.remove('show');
             }, duration);
         }
@@ -408,6 +426,18 @@
         document.querySelectorAll('.admin-card[data-section]').forEach(function(card) {
             card.addEventListener('click', function() {
                 const section = this.dataset.section;
+
+                // === CAMBIAR CÓDIGO ===
+                if (section === 'change-code') {
+                    if (typeof showChangeCodeModal === 'function') {
+                        showChangeCodeModal();
+                    } else {
+                        showToast('❌ Función no disponible', 2000);
+                    }
+                    return;
+                }
+
+                // === RESET ===
                 if (section === 'reset') {
                     if (confirm('⚠️ ¿Estás seguro de que quieres restaurar el contenido original? Esto eliminará todos los cambios guardados.')) {
                         localStorage.removeItem('siteContent');
@@ -416,6 +446,8 @@
                     }
                     return;
                 }
+
+                // === EDITAR CONTENIDO ===
                 openEditor(section);
             });
         });
@@ -453,8 +485,6 @@
             });
 
             overlay.classList.add('active');
-
-            // Guardar referencia de la sección
             overlay.dataset.section = section;
         }
 
