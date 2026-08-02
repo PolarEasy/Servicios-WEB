@@ -1589,3 +1589,144 @@ footer {
 [data-theme="aurora"] .avatar-large {
     border-color: rgba(0, 212, 255, 0.20);
 }
+/* ============================================================
+   DISEÑOS DE PÁGINAS WEB - NUEVA SECCIÓN
+   ============================================================ */
+.designs-section {
+    padding: 70px 0 80px;
+    position: relative;
+    z-index: 1;
+    background: radial-gradient(ellipse at center, rgba(124, 107, 255, 0.02) 0%, transparent 70%);
+    transition: background 0.5s;
+}
+
+.designs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-bottom: 44px;
+}
+
+.design-card {
+    background: rgba(16, 16, 30, 0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 0;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.design-card:hover {
+    border-color: rgba(124, 107, 255, 0.25);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.design-image {
+    height: 140px;
+    background: rgba(124, 107, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.design-placeholder {
+    opacity: 0.6;
+}
+
+.design-info {
+    padding: 24px 24px 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.design-info h3 {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 6px;
+    transition: color 0.4s;
+}
+
+.design-info p {
+    font-size: 0.9rem;
+    color: #a0a0b0;
+    flex: 1;
+    margin-bottom: 14px;
+    line-height: 1.6;
+    transition: color 0.4s;
+}
+
+.design-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.design-tags span {
+    background: rgba(124, 107, 255, 0.08);
+    color: #a78bfa;
+    padding: 2px 14px;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.design-btn {
+    color: #7c6bff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+    align-self: flex-start;
+}
+
+.design-btn:hover {
+    color: #a78bfa;
+}
+
+.designs-cta {
+    text-align: center;
+}
+
+/* ============================================================
+   RESPONSIVE - DISEÑOS
+   ============================================================ */
+@media (max-width: 1024px) {
+    .designs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .designs-grid {
+        grid-template-columns: 1fr;
+    }
+    .design-image {
+        height: 100px;
+        font-size: 2.5rem;
+    }
+}
+
+/* ============================================================
+   ELIMINAR ESPACIO EXTRA DEBAJO DEL FOOTER
+   ============================================================ */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
